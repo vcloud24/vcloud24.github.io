@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Control panel for managing websites.">
+    <meta name="author" content="Your Name">
+    <meta name="keywords" content="website control, push pull data, API management, dark theme">
+    <title>Control Panel</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            font-size: 2em;
+            background-color: #1f1f1f;
+        }
+        button {
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #555555;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Website Control Panel</div>
+        
+        <!-- Push & Pull Section -->
+        <div class="section">
+            <h2>Send Content to Website</h2>
+            <textarea id="contentArea" rows="6" placeholder="Write your content here..."></textarea>
+            <button onclick="pushData()">Push to Website</button>
+            <button onclick="pullData()">Pull Data from Website</button>
+        </div>
+
+        <!-- Pop-up Ads Section -->
+        <div class="section">
+            <h2>Pop-up Ad Manager</h2>
+            <input type="text" id="adContent" placeholder="Enter ad content...">
+            <button onclick="createAd()">Create Pop-up Ad</button>
+        </div>
+
+        <!-- Lock/Unlock Section -->
+        <div class="section">
+            <h2>Site Control</h2>
+            <button onclick="lockSite()">Lock Site</button>
+            <button onclick="unlockSite()">Unlock Site</button>
+        </div>
+
+        <!-- Theme and Language Change -->
+        <div class="section">
+            <h2>Change Theme & Language</h2>
+            <button onclick="changeTheme()">Change Theme</button>
+            <button onclick="changeLanguage()">Change Language</button>
+        </div>
+
+        <!-- API Key & Meta Tag Generator -->
+        <div class="section">
+            <h2>API Key & Meta Tag Generation</h2>
+            <button onclick="generateApiKey()">Generate API Key</button>
+            <p id="apiKeyDisplay"></p>
+        </div>
+    </div>
+
+    <script>
+        async function pushData() {
+            const content = document.getElementById('contentArea').value;
+            if (content) {
+                const response = await fetch('/push', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content: content })
+                });
+                if (response.ok) {
+                    alert('Content pushed to the website.');
+                } else {
+                    alert('Failed to push content.');
+                }
+            } else {
+                alert('Please write some content first.');
+            }
+        }
+
+        async function pullData() {
+            const response = await fetch('/pull');
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('contentArea').value = data.content;
+                alert('Data pulled from the website.');
+            } else {
+                alert('Failed to pull data.');
+            }
+        }
+
+        async function createAd() {
+            const adContent = document.getElementById('adContent').value;
+            if (adContent) {
+                const response = await fetch('/create-ad', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ adContent: adContent })
+                });
+                if (response.ok) {
+                    alert('Pop-up ad created.');
+                } else {
+                    alert('Failed to create pop-up ad.');
+                }
+            } else {
+                alert('Please enter ad content.');
+            }
+        }
+
+        async function lockSite() {
+            const response = await fetch('/lock-site', { method: 'POST' });
+            if (response.ok) {
+                alert('Site locked.');
+            } else {
+                alert('Failed to lock site.');
+            }
+        }
+
+        async function unlockSite() {
+            const response = await fetch('/unlock-site', { method: 'POST' });
+            if (response.ok) {
+                alert('Site unlocked.');
+            } else {
+                alert('Failed to unlock site.');
+            }
+        }
+
+        async function changeTheme() {
+            const response = await fetch('/change-theme', { method: 'POST' });
+            if (response.ok) {
+                alert('Theme changed.');
+            } else {
+                alert('Failed to change theme.');
+            }
+        }
+
+        async function changeLanguage() {
+            const response = await fetch('/change-language', { method: 'POST' });
+            if (response.ok) {
+                alert('Language changed.');
+            } else {
+                alert('Failed to change language.');
+            }
+        }
+
+        async function generateApiKey() {
+            const response = await fetch('/generate-api-key');
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('apiKeyDisplay').textContent = 'Generated API Key: ' + data.apiKey;
+            } else {
+                alert('Failed to generate API key.');
+            }
+        }
+    </script>
+</body>
+</html>
