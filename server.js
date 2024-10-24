@@ -10,7 +10,6 @@ app.use(bodyParser.json());
 // Push data to the site
 app.post('/push', (req, res) => {
     const { content } = req.body;
-    // Save content to a file or database, here we'll simulate a file write
     fs.writeFileSync(path.join(__dirname, 'siteContent.json'), JSON.stringify({ content }));
     res.status(200).send('Content pushed');
 });
@@ -24,32 +23,35 @@ app.get('/pull', (req, res) => {
 // Create pop-up ad
 app.post('/create-ad', (req, res) => {
     const { adContent } = req.body;
-    // Save ad content to an appropriate file or location
     fs.writeFileSync(path.join(__dirname, 'ads.json'), JSON.stringify({ adContent }));
     res.status(200).send('Ad created');
 });
 
 // Lock the site
 app.post('/lock-site', (req, res) => {
-    // Implement logic to lock the site
+    // Logic to lock the site (e.g., writing to a lock file)
+    fs.writeFileSync(path.join(__dirname, 'siteLock.json'), JSON.stringify({ locked: true }));
     res.status(200).send('Site locked');
 });
 
 // Unlock the site
 app.post('/unlock-site', (req, res) => {
-    // Implement logic to unlock the site
+    // Logic to unlock the site (e.g., removing the lock file)
+    fs.unlinkSync(path.join(__dirname, 'siteLock.json'));
     res.status(200).send('Site unlocked');
 });
 
 // Change site theme
 app.post('/change-theme', (req, res) => {
-    // Logic to change the theme
+    // Logic to change the theme (e.g., saving the selected theme)
+    fs.writeFileSync(path.join(__dirname, 'theme.json'), JSON.stringify({ theme: 'dark' }));
     res.status(200).send('Theme changed');
 });
 
 // Change site language
 app.post('/change-language', (req, res) => {
-    // Logic to change the language
+    // Logic to change the language (e.g., saving the selected language)
+    fs.writeFileSync(path.join(__dirname, 'language.json'), JSON.stringify({ language: 'English' }));
     res.status(200).send('Language changed');
 });
 
