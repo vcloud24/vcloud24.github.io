@@ -1,0 +1,73 @@
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #282c34;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Current time display at the top-right corner */
+#time {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2em;
+  color: #a0a0a0;
+}
+
+/* Countdown timer at the bottom-left corner */
+#timer {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 1.2em;
+  color: #e57373;
+}
+
+/* Container for question and options */
+#question-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #3c3f41;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for the options list */
+#options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Buttons for selecting answers */
+button {
+  padding: 10px;
+  font-size: 1em;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #282c34;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+button:hover {
+  background-color: #21a1f1;
+}
+
+/* Feedback for correct or wrong answers */
+#result {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #f1c40f;
+}
