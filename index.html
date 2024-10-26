@@ -1,76 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome!</title>
-    <link rel="stylesheet" href="style.css"> </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vCloud24 | Gaming Platform</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1d;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #login-message {
+      font-size: 1.5em;
+      color: #f54242;
+      margin-bottom: 20px;
+    }
+    .button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
+      color: #ffffff;
+      background-color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>Welcome to the Fun Zone!</h1>
-            <button class="menu-toggle">Menu</button>
-        </header>
-        <nav class="menu">
-            <ul>
-                <li><a href="#" class="how-to-play">How to Play</a></li>
-                <li><a href="vuyani1.github.io/channels.io" target="_blank" class="youtube">YouTube Channel</a></li>
-                <li><a href="#" class="games">Games (Click to Expand)</a>
-                    <ul class="games-submenu"> </ul>
-                </li>
-            </ul>
-        </nav>
-        <main class="content">
-            <p>Get ready for some awesome fun! Login to unlock the world of exciting games.</p>
-            <a href="vcloud.24.github.io/LOG-IN.html" class="login-button">Login</a>
-        </main>
-        <footer class="footer">
-            <p>&copy; 2024 Fun Zone. All Rights Reserved.</p>
-        </footer>
-    </div>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const menu = document.querySelector('.menu');
-        const gamesLink = document.querySelector('.games');
-        const gamesSubmenu = document.querySelector('.games-submenu');
+  <div id="login-message">Please wait for authentication...</div>
+  
+  <button class="button" id="youtube-btn" onclick="redirect('youtube')" disabled>YouTube</button>
+  <button class="button" id="games-btn" onclick="redirect('games')" disabled>Games</button>
+  <button class="button" id="vgames-btn" onclick="redirect('vgames')" disabled>VGames</button>
 
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('active');
-        });
+  <script>
+    // Username and password validation
+    const validUsername = "yourUsername";
+    const validPassword = "yourPassword";
+    const successCode = "THEuserHASsignedIN123123";
 
-        gamesLink.addEventListener('click', () => {
-            gamesSubmenu.classList.toggle('active'); // Toggle submenu visibility
-        });
+    // Redirect functions for each button
+    function redirect(site) {
+      switch (site) {
+        case 'youtube':
+          window.location.href = "https://vcloud24.github.io/yt.html";
+          break;
+        case 'games':
+          window.location.href = "https://vcloud24.github.io/games.html";
+          break;
+        case 'vgames':
+          window.location.href = "https://vcloud24.github.io/VGAMES.html";
+          break;
+      }
+    }
 
-        // Add event listeners to buttons for cool animations (using Javascript libraries like Anime.js)
-        const loginButton = document.querySelector('.login-button');
+    // Check login and validation status
+    function validateLogin() {
+      const username = prompt("Enter Username:");
+      const password = prompt("Enter Password:");
 
-        loginButton.addEventListener('mouseenter', () => {
-            // Animate button glow on hover
-        });
+      if (username === validUsername && password === validPassword) {
+        fetch(`https://vcloud24.github.io/login.html?user=${username}`)
+          .then(response => response.text())
+          .then(code => {
+            if (code === successCode) {
+              document.getElementById('login-message').textContent = "Login successful! Access granted.";
+              enableButtons();
+            } else {
+              alert("Login failed. Redirecting to login page.");
+              window.location.href = "https://vcloud24.github.io/login.html";
+            }
+          })
+          .catch(() => alert("Error connecting to login page."));
+      } else {
+        alert("Invalid credentials. Redirecting to login page.");
+        window.location.href = "https://vcloud24.github.io/login.html";
+      }
+    }
 
-        loginButton.addEventListener('click', () => {
-            // Animate button jump and color change on click
-            // Redirect to login page after animation
-        });
+    // Enable buttons after successful login
+    function enableButtons() {
+      document.getElementById("youtube-btn").disabled = false;
+      document.getElementById("games-btn").disabled = false;
+      document.getElementById("vgames-btn").disabled = false;
+      document.getElementById("login-message").style.color = "#42f554";
+    }
 
-        // Implement logic to dynamically populate the games submenu based on data retrieval
-
-        // Example using fetch API (replace with your actual data source)
-        fetch('your_games_data.json')
-            .then(response => response.json())
-            .then(data => {
-                const gameList = gamesSubmenu.querySelector('ul'); // Assuming an unordered list exists within submenu
-                data.forEach(game => {
-                    const listItem = document.createElement('li');
-                    const gameLink = document.createElement('a');
-                    gameLink.href = game.url; // Replace with actual game URL from data
-                    gameLink.textContent = game.title; // Replace with actual game title from data
-                    listItem.appendChild(gameLink);
-                    gameList.appendChild(listItem);
-                });
-            });
-    </script>
+    // Initiate login validation
+    window.onload = validateLogin;
+  </script>
 </body>
 </html>
