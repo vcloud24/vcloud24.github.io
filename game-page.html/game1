@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivia Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #282c34;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #time {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2em;
+    }
+    #timer {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 1.2em;
+    }
+    #question-container {
+      text-align: center;
+      margin: 20px;
+    }
+    #options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    button {
+      padding: 10px;
+      font-size: 1em;
+      background-color: #61dafb;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #21a1f1;
+    }
+  </style>
+</head>
+<body>
+  <div id="time"></div>
+  <div id="timer">Time left: 30s</div>
+  <div id="question-container">
+    <h1>Trivia Game</h1>
+    <p id="question">Loading question...</p>
+    <div id="options"></div>
+    <p id="result"></p>
+  </div>
 
+  <script>
+    const apiKey = "AIzaSyDeBZJxFraikgcBhH-ybLR6U-fAxlvjqmM";
+    let timerInterval, questionTimeout, secondsLeft = 30;
+    let wrongAnswers = 0;
+    
+    // Display current time
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('time').textContent = now.toLocaleTimeString();
+    }, 1000);
+
+    // Function to fetch a new trivia question
+    async function fetchQuestion() {
+      const response = await fetch(`https://trivia.api.com/generate?apiKey=${apiKey}`);
+      const data = await response.json();
+      displayQuestion(data.question, data.options, data.correctAnswer);
+    }
+
+    // Display question and reset timer
+    function displayQuestion(question, options, correctAnswer) {
+      document.getElementById('question').textContent = question;
+      const optionsContainer = document.getElementById('options');
+      optionsContainer.innerHTML = '';
+      
+      options.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.onclick = () => checkAnswer(option, correctAnswer);
+        optionsContainer.appendChild(button);
+      });
+      
+      resetTimer();
+    }
+
+    // Check answer and provide feedback
+    function checkAnswer(selected, correct) {
+      clearInterval(timerInterval);
+      clearTimeout(questionTimeout);
+      
+      if (selected === correct) {
+        document.getElementById('result').textContent = "Correct!";
+        setTimeout(fetchQuestion, 1000);
+      } else {
+        wrongAnswers++;
+        document.getElementById('result').textContent = `Wrong! Correct answer: ${correct}`;
+        if (wrongAnswers >= 10) {
+          alert("Game Over! Too many incorrect answers.");
+          resetGame();
+        } else {
+          setTimeout(fetchQuestion, 1000);
+        }
+      }
+    }
+
+    // Reset timer for each question
+    function resetTimer() {
+      clearInterval(timerInterval);
+      clearTimeout(questionTimeout);
+      secondsLeft = 30;
+      document.getElementById('timer').textContent = `Time left: ${secondsLeft}s`;
+      
+      timerInterval = setInterval(() => {
+        secondsLeft--;
+        document.getElementById('timer').textContent = `Time left: ${secondsLeft}s`;
+        
+        if (secondsLeft <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById('result').textContent = "Time's up! No point awarded.";
+          wrongAnswers++;
+          setTimeout(fetchQuestion, 1000);
+        }
+      }, 1000);
+      
+      questionTimeout = setTimeout(() => {
+        clearInterval(timerInterval);
+        document.getElementById('result').textContent = "Time's up!";
+        wrongAnswers++;
+        fetchQuestion();
+      }, 30000);
+    }
+
+    // Reset game
+    function resetGame() {
+      wrongAnswers = 0;
+      fetchQuestion();
+    }
+
+    // Initial question fetch
+    fetchQuestion();
+  </script>
+</body>
+</html>
