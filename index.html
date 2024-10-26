@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome!</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Welcome to the Fun Zone!</h1>
+            <button class="menu-toggle">Menu</button>
+        </header>
+        <nav class="menu">
+            <ul>
+                <li><a href="#" class="how-to-play">How to Play</a></li>
+                <li><a href="vuyani1.github.io/channels.io" target="_blank" class="youtube">YouTube Channel</a></li>
+                <li><a href="#" class="games">Games (Click to Expand)</a>
+                    <ul class="games-submenu"> </ul>
+                </li>
+            </ul>
+        </nav>
+        <main class="content">
+            <p>Get ready for some awesome fun! Login to unlock the world of exciting games.</p>
+            <a href="vcloud.24.github.io/LOG-IN.html" class="login-button">Login</a>
+        </main>
+        <footer class="footer">
+            <p>&copy; 2024 Fun Zone. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+        const gamesLink = document.querySelector('.games');
+        const gamesSubmenu = document.querySelector('.games-submenu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        gamesLink.addEventListener('click', () => {
+            gamesSubmenu.classList.toggle('active'); // Toggle submenu visibility
+        });
+
+        // Add event listeners to buttons for cool animations (using Javascript libraries like Anime.js)
+        const loginButton = document.querySelector('.login-button');
+
+        loginButton.addEventListener('mouseenter', () => {
+            // Animate button glow on hover
+        });
+
+        loginButton.addEventListener('click', () => {
+            // Animate button jump and color change on click
+            // Redirect to login page after animation
+        });
+
+        // Implement logic to dynamically populate the games submenu based on data retrieval
+
+        // Example using fetch API (replace with your actual data source)
+        fetch('your_games_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const gameList = gamesSubmenu.querySelector('ul'); // Assuming an unordered list exists within submenu
+                data.forEach(game => {
+                    const listItem = document.createElement('li');
+                    const gameLink = document.createElement('a');
+                    gameLink.href = game.url; // Replace with actual game URL from data
+                    gameLink.textContent = game.title; // Replace with actual game title from data
+                    listItem.appendChild(gameLink);
+                    gameList.appendChild(listItem);
+                });
+            });
+    </script>
+</body>
+</html>
