@@ -1,28 +1,28 @@
 let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
 
-function nextSlide() {
-    const slides = document.querySelectorAll('.slide');
+function showNextSlide() {
     slides[currentSlide].classList.remove('active');
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add('active');
-
     if (currentSlide === 0) {
         document.querySelector('.welcome').textContent = 'Welcome | Sawubona | Bienvenue | Loop';
     }
 }
 
-function chooseLanguage(lang) {
+function chooseLanguage(language) {
     const creditsText = {
-        en: "Made using GitHub, ChatGPT, and Notepad++",
+        en: "Created with GitHub, ChatGPT, and Notepad++",
         zu: "Kwenziwe kusetshenziswa iGitHub, iChatGPT, neNotepad++",
         fr: "Créé avec GitHub, ChatGPT et Notepad++"
     };
-    document.getElementById('creditsText').textContent = creditsText[lang];
-    nextSlide();
+    document.getElementById('creditsText').textContent = creditsText[language];
+    showNextSlide();
 }
 
 function displayInfo() {
-    document.getElementById('dateTime').textContent = new Date().toLocaleString();
+    const date = new Date();
+    document.getElementById('dateTime').textContent = date.toLocaleString();
     fetch('https://ipapi.co/json/')
         .then(response => response.json())
         .then(data => {
@@ -31,9 +31,8 @@ function displayInfo() {
         });
 }
 
-setInterval(nextSlide, 5000);
-
 document.addEventListener("DOMContentLoaded", () => {
+    setInterval(showNextSlide, 5000); // 5 seconds per slide
     displayInfo();
     setInterval(() => {
         document.getElementById('timeDisplay').textContent = new Date().toLocaleTimeString();
