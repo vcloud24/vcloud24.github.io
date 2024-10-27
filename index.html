@@ -1,105 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vCloud24 | Gaming Platform</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #1a1a1d;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    #login-message {
-      font-size: 1.5em;
-      color: #f54242;
-      margin-bottom: 20px;
-    }
-    .button {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 1em;
-      color: #ffffff;
-      background-color: #333;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .button:hover {
-      background-color: #555;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vilakazi Games</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="slide" id="slide1">
+        <h1 id="welcomeText">Welcome / Bienvenue / Siyakwamukela</h1>
+    </div>
 
-  <div id="login-message">Please wait for authentication...</div>
-  
-  <button class="button" id="youtube-btn" onclick="redirect('youtube')" disabled>YouTube</button>
-  <button class="button" id="games-btn" onclick="redirect('games')" disabled>Games</button>
-  <button class="button" id="vgames-btn" onclick="redirect('vgames')" disabled>VGames</button>
+    <div class="slide" id="slide2">
+        <h2>Choose Your Language:</h2>
+        <button onclick="chooseLanguage('en')">English</button>
+        <button onclick="chooseLanguage('fr')">French</button>
+        <button onclick="chooseLanguage('zu')">Zulu</button>
+    </div>
 
-  <script>
-    // Username and password validation
-    const validUsername = "yourUsername";
-    const validPassword = "yourPassword";
-    const successCode = "THEuserHASsignedIN123123";
+    <div class="slide" id="slide3">
+        <p id="appsText">This website was made using:</p>
+        <ul>
+            <li>GitHub</li>
+            <li>ChatGPT (for translation)</li>
+            <li>Notepad++</li>
+        </ul>
+    </div>
 
-    // Redirect functions for each button
-    function redirect(site) {
-      switch (site) {
-        case 'youtube':
-          window.location.href = "https://vcloud24.github.io/yt.html";
-          break;
-        case 'games':
-          window.location.href = "https://vcloud24.github.io/games.html";
-          break;
-        case 'vgames':
-          window.location.href = "https://vcloud24.github.io/VGAMES.html";
-          break;
-      }
-    }
+    <div class="slide" id="slide4">
+        <p id="userInfo">Date: <span id="date"></span><br>
+        Time: <span id="time"></span><br>
+        Country: <span id="country"></span><br>
+        IP Address: <span id="ip"></span></p>
+    </div>
 
-    // Check login and validation status
-    function validateLogin() {
-      const username = prompt("Enter Username:");
-      const password = prompt("Enter Password:");
+    <div class="slide" id="slide5">
+        <h1 id="logoText">VGAMES</h1>
+        <div id="gameLinks">
+            <a href="vcloud24.github.io/ludo.html">Ludo</a>
+            <a href="vcloud24.github.io/TIC-TAC-TOE.html">Tic Tac Toe</a>
+            <a href="vcloud24.github.io/game3.html">Game 3</a>
+            <a href="vcloud24.github.io/game4.html">Game 4</a>
+        </div>
+        <div id="loopMessage">Loop</div>
+        <span id="slide5Time"></span>
+    </div>
 
-      if (username === validUsername && password === validPassword) {
-        fetch(`https://vcloud24.github.io/login.html?user=${username}`)
-          .then(response => response.text())
-          .then(code => {
-            if (code === successCode) {
-              document.getElementById('login-message').textContent = "Login successful! Access granted.";
-              enableButtons();
-            } else {
-              alert("Login failed. Redirecting to login page.");
-              window.location.href = "https://vcloud24.github.io/login.html";
-            }
-          })
-          .catch(() => alert("Error connecting to login page."));
-      } else {
-        alert("Invalid credentials. Redirecting to login page.");
-        window.location.href = "https://vcloud24.github.io/login.html";
-      }
-    }
-
-    // Enable buttons after successful login
-    function enableButtons() {
-      document.getElementById("youtube-btn").disabled = false;
-      document.getElementById("games-btn").disabled = false;
-      document.getElementById("vgames-btn").disabled = false;
-      document.getElementById("login-message").style.color = "#42f554";
-    }
-
-    // Initiate login validation
-    window.onload = validateLogin;
-  </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
-<link rel="stylesheet" href="style.css">
