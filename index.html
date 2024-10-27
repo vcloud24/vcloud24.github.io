@@ -3,46 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VGAMES - Prestige Slides</title>
+    <title>VGAMES Prestige Slides</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Slide 1: Welcome Message -->
-    <div id="slide1" class="slide active">
-        <h1 class="welcome">Welcome | Sawubona | Bienvenue</h1>
-    </div>
-
-    <!-- Slide 2: Language Selection -->
-    <div id="slide2" class="slide">
-        <h2>Select Your Language:</h2>
-        <button onclick="chooseLanguage('en')">English</button>
-        <button onclick="chooseLanguage('zu')">Zulu</button>
-        <button onclick="chooseLanguage('fr')">French</button>
-    </div>
-
-    <!-- Slide 3: Credits -->
-    <div id="slide3" class="slide">
-        <h2 id="creditsText">Created with GitHub, ChatGPT, and Notepad++</h2>
-    </div>
-
-    <!-- Slide 4: Date, Time, Country, IP -->
-    <div id="slide4" class="slide">
-        <h2>Your Info:</h2>
-        <p id="dateTime">Loading Date and Time...</p>
-        <p id="country">Country: Loading...</p>
-        <p id="ipAddress">IP Address: Loading...</p>
-    </div>
-
-    <!-- Slide 5: Game Links -->
-    <div id="slide5" class="slide">
-        <div id="gameTitle" class="game-title">VGAMES</div>
-        <div class="game-links">
-            <a href="vcloud24.github.io/ludo.html">Ludo</a>
-            <a href="vcloud24.github.io/TIC-TAC-TOE.html">Tic Tac Toe</a>
-            <a href="vcloud24.github.io/game4.html">Game 4</a>
-            <a href="vcloud24.github.io/game3.html">Game 3</a>
+    <div id="slider">
+        <!-- Slide 1: Welcome -->
+        <div class="slide active" id="slide1">
+            <h1 class="welcome-text">Welcome to VGAMES</h1>
         </div>
-        <p id="slide5Time" class="pc-only">Time: <span id="timeDisplay"></span></p>
+
+        <!-- Slide 2: Copyright Information -->
+        <div class="slide" id="slide2">
+            <h2>&copy; 2024 VGAMES - All rights reserved</h2>
+            <p>Powered by GitHub, ChatGPT, and Notepad++</p>
+        </div>
+
+        <!-- Slide 3: Credits -->
+        <div class="slide" id="slide3">
+            <h2>Project built with:</h2>
+            <ul>
+                <li>GitHub</li>
+                <li>ChatGPT for Assistance</li>
+                <li>Notepad++ for Coding</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: User Information -->
+        <div class="slide" id="slide4">
+            <h2>Your Info:</h2>
+            <p id="dateTime">Loading Date and Time...</p>
+            <p id="country">Country: Loading...</p>
+            <p id="ipAddress">IP Address: Loading...</p>
+        </div>
+
+        <!-- Slide 5: VGAMES Links -->
+        <div class="slide" id="slide5">
+            <h1 class="game-title">VGAMES</h1>
+            <div class="game-links">
+                <a href="https://vcloud24.github.io/ludo.html">Ludo</a>
+                <a href="https://vcloud24.github.io/TIC-TAC-TOE.html">Tic Tac Toe</a>
+                <a href="https://vcloud24.github.io/game3.html">Game 3</a>
+                <a href="https://vcloud24.github.io/game4.html">Game 4</a>
+            </div>
+            <p id="slide5Time" class="pc-only">Time: <span id="timeDisplay"></span></p>
+        </div>
     </div>
 
     <script src="scripts.js"></script>
