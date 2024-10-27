@@ -121,3 +121,4 @@ function shareScore() {
 
 // Start the game
 fetchQuestions();
+
