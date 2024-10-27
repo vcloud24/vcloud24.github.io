@@ -3,33 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VGAMES Prestige Slides</title>
+    <title>VGAMES Slides</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="slider">
-        <!-- Slide 1: Welcome -->
+        <!-- Slide 1: Welcome in multiple languages -->
         <div class="slide active" id="slide1">
-            <h1 class="welcome-text">Welcome to VGAMES</h1>
+            <h1 class="welcome-text">Welcome | Sawubona | Bienvenue</h1>
         </div>
-
-        <!-- Slide 2: Copyright Information -->
+        
+        <!-- Slide 2: Language selection -->
         <div class="slide" id="slide2">
-            <h2>&copy; 2024 VGAMES - All rights reserved</h2>
-            <p>Powered by GitHub, ChatGPT, and Notepad++</p>
+            <h2>Select Your Language:</h2>
+            <button onclick="chooseLanguage('en')">English</button>
+            <button onclick="chooseLanguage('zu')">Zulu</button>
+            <button onclick="chooseLanguage('fr')">French</button>
         </div>
 
-        <!-- Slide 3: Credits -->
+        <!-- Slide 3: Credits in chosen language -->
         <div class="slide" id="slide3">
-            <h2>Project built with:</h2>
-            <ul>
-                <li>GitHub</li>
-                <li>ChatGPT for Assistance</li>
-                <li>Notepad++ for Coding</li>
-            </ul>
+            <h2 id="creditsText">Made using GitHub, ChatGPT, and Notepad++</h2>
         </div>
 
-        <!-- Slide 4: User Information -->
+        <!-- Slide 4: User info with Date/Time, Country, and IP Address -->
         <div class="slide" id="slide4">
             <h2>Your Info:</h2>
             <p id="dateTime">Loading Date and Time...</p>
@@ -37,14 +34,14 @@
             <p id="ipAddress">IP Address: Loading...</p>
         </div>
 
-        <!-- Slide 5: VGAMES Links -->
+        <!-- Slide 5: VGAMES Links and Time Display -->
         <div class="slide" id="slide5">
             <h1 class="game-title">VGAMES</h1>
             <div class="game-links">
-                <a href="https://vcloud24.github.io/ludo.html">Ludo</a>
-                <a href="https://vcloud24.github.io/TIC-TAC-TOE.html">Tic Tac Toe</a>
-                <a href="https://vcloud24.github.io/game3.html">Game 3</a>
-                <a href="https://vcloud24.github.io/game4.html">Game 4</a>
+                <a href="vcloud24.github.io/ludo.html">Ludo</a>
+                <a href="vcloud24.github.io/TIC-TAC-TOE.html">Tic Tac Toe</a>
+                <a href="vcloud24.github.io/game3.html">Game 3</a>
+                <a href="vcloud24.github.io/game4.html">Game 4</a>
             </div>
             <p id="slide5Time" class="pc-only">Time: <span id="timeDisplay"></span></p>
         </div>
