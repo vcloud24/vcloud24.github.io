@@ -1,48 +1,98 @@
-/* Basic Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(45deg, #1a1a2e, #16213e);
+    font-family: 'Arial', sans-serif;
+    color: white;
+    transition: background 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Body Styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #1a1a1d;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
+.slide {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    animation: fade-in 1s ease;
 }
 
-/* Login Message Styling */
-#login-message {
-  font-size: 1.5em;
-  color: #f54242;
-  margin-bottom: 20px;
+h1, h2, p, ul, li {
+    margin: 10px 0;
 }
 
-/* Button Styling */
-.button {
-  padding: 10px 20px;
-  margin: 10px;
-  font-size: 1em;
-  color: #ffffff;
-  background-color: #333;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+#welcomeText {
+    font-size: 2.5em;
+    color: #fff;
+    animation: glow 2s infinite, move 5s infinite;
 }
 
-.button:hover {
-  background-color: #555;
+@keyframes glow {
+    0% { color: #f0a500; }
+    50% { color: #00bfff; }
+    100% { color: #f0a500; }
 }
 
-.button:disabled {
-  background-color: #555;
-  cursor: not-allowed;
+@keyframes move {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+    #welcomeText {
+        font-size: 2em;
+        animation: glow 2s infinite alternate, bounce 1.5s infinite alternate;
+    }
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #16213e;
+    cursor: pointer;
+}
+
+#logoText {
+    font-size: 2.5em;
+    color: #f5b041;
+    animation: glow 3s infinite, color-change 5s infinite;
+}
+
+@keyframes color-change {
+    0% { color: #3498db; }
+    50% { color: #f5b041; }
+    100% { color: #3498db; }
+}
+
+#gameLinks a {
+    display: inline-block;
+    margin: 10px;
+    color: #f5b041;
+    text-decoration: none;
+    font-size: 1.2em;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#slide5Time {
+    font-size: 1.5em;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #f5b041;
+    animation: glow 1s infinite alternate;
+}
+
+@media (max-width: 768px) {
+    #slide5Time { display: none; }
 }
