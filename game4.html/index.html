@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VGAMES Memory Card Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="score" id="scoreBox">Score: <span id="score">0</span></div>
+    <div class="strike" id="strikeBox">Strikes: <span id="strikes">0</span>/3</div>
+
+    <div class="game-container">
+        <div class="card-grid" id="cardGrid">
+            <!-- Cards will be generated here by JavaScript -->
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <p id="popupText">You scored <span id="finalScore">0</span>! Share your memory skills with friends!</p>
+            <button onclick="shareScore()">Share with Friends</button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
