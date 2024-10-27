@@ -1,87 +1,95 @@
-* {
+/* General styling */
+body, html {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body, html {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
-    background: linear-gradient(45deg, #1e1e1e, #333333);
 }
 
 #slider {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(45deg, #ff69b4, #00bfff);
+    animation: bgAnimation 8s infinite alternate;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background: linear-gradient(45deg, #8b00ff, #e100ff);
-    animation: bgAnimation 8s infinite alternate;
-    color: #f5f5f5;
 }
 
 @keyframes bgAnimation {
-    0% { background: linear-gradient(45deg, #8b00ff, #e100ff); }
-    100% { background: linear-gradient(45deg, #e100ff, #8b00ff); }
+    0% { background: linear-gradient(45deg, #ff69b4, #00bfff); }
+    50% { background: linear-gradient(45deg, #00bfff, #ff69b4); }
+    100% { background: linear-gradient(45deg, #ff69b4, #00bfff); }
 }
 
 .slide {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    color: white;
     width: 100%;
     height: 100%;
 }
 
 .slide.active {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    animation: slideIn 1.5s ease;
-}
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .welcome-text {
-    font-size: 3.5em;
-    color: #fff;
-    animation: colorPulse 5s infinite alternate;
+    font-size: 3em;
+    animation: glowAndJump 5s infinite alternate;
 }
 
-@keyframes colorPulse {
+@keyframes glowAndJump {
+    0% { color: #ff69b4; transform: translateX(0); }
+    50% { color: #00bfff; transform: translateX(10px); }
+    100% { color: #ff69b4; transform: translateX(-10px); }
+}
+
+button {
+    padding: 15px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 15px;
+    background: #333;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #555;
+}
+
+.game-title {
+    font-size: 3.5em;
+    text-transform: uppercase;
+    color: #ff69b4;
+    animation: colorChange 3s infinite alternate;
+}
+
+@keyframes colorChange {
     0% { color: #ff69b4; }
     100% { color: #00bfff; }
 }
 
-button, .game-links a {
-    padding: 12px 24px;
-    font-size: 1.2em;
-    margin: 10px;
-    text-decoration: none;
+.game-links a {
+    display: block;
     color: white;
-    background: #333;
-    border: 2px solid #666;
-    border-radius: 5px;
-    transition: all 0.3s;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin: 10px;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    transition: background 0.3s;
 }
 
-button:hover, .game-links a:hover {
-    background: #555;
-    color: #ff69b4;
-}
-
-.game-title {
-    font-size: 2.5em;
-    text-transform: uppercase;
-    animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-    0% { text-shadow: 0 0 10px #ff69b4; }
-    100% { text-shadow: 0 0 20px #00bfff; }
+.game-links a:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .pc-only {
