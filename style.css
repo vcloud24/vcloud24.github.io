@@ -1,79 +1,89 @@
-body, html {
+/* General Styles */
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Arial', sans-serif;
     overflow: hidden;
 }
 
 .slide {
     display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    text-align: center;
-    background: linear-gradient(45deg, #ff69b4, #00bfff);
-    animation: bgAnimation 8s infinite alternate;
     color: #fff;
-}
-
-@keyframes bgAnimation {
-    0% { background: linear-gradient(45deg, #ff69b4, #00bfff); }
-    50% { background: linear-gradient(45deg, #00bfff, #ff69b4); }
-    100% { background: linear-gradient(45deg, #ff69b4, #00bfff); }
+    background: linear-gradient(120deg, #ff69b4, #00bfff);
+    animation: backgroundTransition 8s infinite alternate;
+    transition: opacity 1s;
 }
 
 .slide.active {
     display: flex;
+    opacity: 1;
 }
 
+/* Background Animation */
+@keyframes backgroundTransition {
+    0% { background: linear-gradient(120deg, #ff69b4, #00bfff); }
+    100% { background: linear-gradient(120deg, #00bfff, #ff69b4); }
+}
+
+/* Welcome Animation */
 .welcome {
     font-size: 2.5em;
-    color: #fff;
-    animation: glowAndMove 5s infinite alternate;
+    animation: jumpAndGlow 2s infinite alternate;
 }
 
-@keyframes glowAndMove {
-    0% { color: #ff69b4; transform: translateX(0); }
-    50% { color: #00bfff; transform: translateX(10px); }
-    100% { color: #ff69b4; transform: translateX(-10px); }
-}
-
-button {
-    padding: 15px;
-    margin: 5px;
-    border: none;
-    border-radius: 10px;
-    background: #333;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-button:hover {
-    background: #555;
-}
-
-.pc-only {
-    display: none;
-}
-
+/* PC-Specific Animation */
 @media (min-width: 768px) {
-    .pc-only { display: block; }
-
     .welcome {
         font-size: 3.5em;
-        animation: glow 3s infinite alternate;
+        animation: colorChange 3s infinite alternate;
     }
 
-    .game-title {
-        font-size: 3em;
-        text-transform: uppercase;
-        color: #ff69b4;
-        animation: titleGlow 2s infinite alternate;
+    .pc-only {
+        display: block;
     }
+}
 
-    @keyframes titleGlow {
-        0% { color: #ff69b4; }
-        100% { color: #00bfff; }
-    }
+/* Button Styling */
+button {
+    padding: 15px 25px;
+    margin: 5px;
+    font-size: 1em;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Game Title Style */
+.game-title {
+    font-size: 3em;
+    font-weight: bold;
+    color: #ff69b4;
+    animation: colorCycle 2s infinite alternate;
+}
+
+/* Keyframes */
+@keyframes jumpAndGlow {
+    0% { transform: translateY(0); text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+    50% { transform: translateY(-15px); text-shadow: 0 0 12px rgba(255, 255, 255, 1); }
+    100% { transform: translateY(0); text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+}
+
+@keyframes colorChange {
+    0% { color: #ff69b4; }
+    100% { color: #00bfff; }
+}
+
+@keyframes colorCycle {
+    0% { color: #ff69b4; }
+    100% { color: #00bfff; }
 }
