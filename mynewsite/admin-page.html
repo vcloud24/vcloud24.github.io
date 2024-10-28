@@ -3,13 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VGAMES - Admin</title>
+    <title>VGAMES - Admin Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
-<body class="admin-body">
+<body class="admin-body" onload="checkAdminAccess()">
     <div class="admin-container">
         <img src="vgames-logo.png" alt="VGAMES Logo" class="logo">
-        <h2>Admin Page</h2>
+        <h1>Admin Dashboard</h1>
+        
+        <p>Welcome to the VGAMES Admin Dashboard! Here, you can manage user accounts, view logs, and handle site settings.</p>
+        
+        <div class="admin-actions">
+            <h3>Site Management</h3>
+            <ul>
+                <li><button onclick="viewUsers()">View User Accounts</button></li>
+                <li><button onclick="viewLogs()">View Access Logs</button></li>
+                <li><button onclick="manageSettings()">Manage Site Settings</button></li>
+            </ul>
+        </div>
+        
+        <div class="admin-notifications">
+            <h3>Notifications</h3>
+            <p>No new notifications.</p>
+        </div>
+        
+        <div class="admin-support">
+            <h3>Support and Resources</h3>
+            <p>For technical support, please contact the VGAMES support team or refer to the admin documentation.</p>
+        </div>
+        
+        <button class="logout-btn" onclick="logout()">Log Out</button>
     </div>
+
+    <script>
+        // Check if user has admin access
+        function checkAdminAccess() {
+            const currentUser = sessionStorage.getItem("currentUser");
+            if (!currentUser || !isAdmin(currentUser)) {
+                alert("Access Denied: Admins Only");
+                window.location.href = "home-page.html";
+            }
+        }
+
+        function isAdmin(username) {
+            // Assumes accounts.js has an 'isAdmin' property for admin accounts
+            return accounts[username] && accounts[username].isAdmin;
+        }
+
+        // Function to handle viewing users (placeholder)
+        function viewUsers() {
+            alert("User account details will be displayed here.");
+        }
+
+        // Function to handle viewing logs (placeholder)
+        function viewLogs() {
+            alert("Access logs will be displayed here.");
+        }
+
+        // Function to handle managing site settings (placeholder)
+        function manageSettings() {
+            alert("Site settings management coming soon.");
+        }
+
+        // Logout function
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = "log-in.html";
+        }
+    </script>
 </body>
 </html>
