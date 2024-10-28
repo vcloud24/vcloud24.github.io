@@ -9,28 +9,19 @@ body {
     min-height: 100vh;
 }
 
-.logo {
-    width: 120px;
-    margin-bottom: 20px;
-}
-
-.index-body {
-    background: linear-gradient(to right, #ff6ec7, #7bc6ff);
+.index-body, .login-body, .home-body, .admin-body {
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    color: white;
 }
 
 @media (max-width: 768px) {
-    .index-body {
-        background: linear-gradient(to right, #7cff96, #ffe47a);
+    .index-body, .login-body, .home-body, .admin-body {
+        background: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
     }
 }
 
-.login-body, .home-body, .admin-body {
-    background: #222;
-    color: #fff;
-}
-
-.login-container, .home-container, .admin-container {
-    background: rgba(0, 0, 0, 0.8);
+.container {
+    background: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
