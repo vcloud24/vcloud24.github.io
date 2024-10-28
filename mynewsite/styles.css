@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.logo {
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+.index-body {
+    background: linear-gradient(to right, #ff6ec7, #7bc6ff);
+}
+
+@media (max-width: 768px) {
+    .index-body {
+        background: linear-gradient(to right, #7cff96, #ffe47a);
+    }
+}
+
+.login-body, .home-body, .admin-body {
+    background: #222;
+    color: #fff;
+}
+
+.login-container, .home-container, .admin-container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
