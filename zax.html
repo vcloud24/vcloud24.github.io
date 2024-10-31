@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VGAMES Multiplayer Trivia Game</title>
+  <link rel="icon" href="ilogot.jpeg" type="image/jpeg">
+  <style>
+    /* Main styling */
+    body, html {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(45deg, pink, blue);
+      animation: glowing 3s infinite alternate;
+      color: white;
+    }
+    h1 {
+      font-size: 3em;
+      text-align: center;
+    }
+    /* Container styling */
+    #game-container, #winner-screen, #name-input-modal, #restricted-message {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      color: #fff;
+    }
+    #restricted-message {
+      display: none;
+    }
+    /* Other styling omitted for brevity */
+  </style>
+</head>
+<body>
+
+  <h1>VGAMES Multiplayer Trivia</h1>
+
+  <!-- Mobile Game Container -->
+  <div id="setup-container">
+    <h2>Choose number of players (1-4):</h2>
+    <input type="number" id="num-players" min="1" max="4" value="2">
+    <button onclick="startNameInput()">Start Game</button>
+  </div>
+
+  <!-- Restricted Message for PC -->
+  <div id="restricted-message">
+    <h2>This game is only available on mobile devices.</h2>
+    <p>For the PC version, please visit:</p>
+    <a href="https://vgames1.github.io/atrivia.html" target="_blank">VGAMES Trivia Game - PC Version</a>
+  </div>
+
+  <script>
+    // Device Detection Script
+    function isMobileDevice() {
+      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    window.onload = function() {
+      if (isMobileDevice()) {
+        document.getElementById('setup-container').style.display = 'flex';
+      } else {
+        document.getElementById('restricted-message').style.display = 'flex';
+      }
+    };
+
+    // Questions Array
+    const questions = [
+      {question: "What is the capital of France?", answers: ["Paris", "Rome", "Berlin", "Madrid"], correct: 0},
+      {question: "Who wrote 'To Kill a Mockingbird'?", answers: ["Harper Lee", "J.K. Rowling", "Mark Twain", "Jane Austen"], correct: 0},
+      {question: "What is the largest planet in our solar system?", answers: ["Earth", "Mars", "Jupiter", "Saturn"], correct: 2},
+      {question: "What is the smallest country in the world?", answers: ["Monaco", "Vatican City", "Luxembourg", "Malta"], correct: 1},
+      {question: "What element does 'O' represent on the periodic table?", answers: ["Gold", "Oxygen", "Osmium", "Organium"], correct: 1},
+      {question: "What year did the Titanic sink?", answers: ["1912", "1905", "1898", "1921"], correct: 0},
+      {question: "Which planet is known as the Red Planet?", answers: ["Mars", "Venus", "Jupiter", "Saturn"], correct: 0},
+      {question: "Who painted the Mona Lisa?", answers: ["Vincent van Gogh", "Leonardo da Vinci", "Michelangelo", "Raphael"], correct: 1},
+      {question: "What is the most spoken language in the world?", answers: ["English", "Spanish", "Mandarin", "Hindi"], correct: 2},
+      {question: "Who invented the telephone?", answers: ["Thomas Edison", "Nikola Tesla", "Alexander Graham Bell", "Albert Einstein"], correct: 2},
+      {question: "What is the largest animal on Earth?", answers: ["Elephant", "Blue Whale", "Giraffe", "Great White Shark"], correct: 1},
+      {question: "How many continents are there?", answers: ["5", "6", "7", "8"], correct: 2},
+      {question: "What is the main ingredient in guacamole?", answers: ["Tomato", "Avocado", "Pepper", "Cucumber"], correct: 1},
+      {question: "What does 'HTTP' stand for?", answers: ["Hypertext Transfer Protocol", "Hyperloop Transfer Text", "High Transfer Text Protocol", "Hyperlink Transfer Text"], correct: 0},
+      {question: "In which country is the Great Barrier Reef located?", answers: ["Australia", "USA", "Brazil", "South Africa"], correct: 0},
+      {question: "What year did World War II end?", answers: ["1940", "1942", "1945", "1950"], correct: 2},
+      {question: "What is the hardest natural substance on Earth?", answers: ["Gold", "Iron", "Diamond", "Emerald"], correct: 2},
+      {question: "What is the capital of Japan?", answers: ["Seoul", "Tokyo", "Beijing", "Shanghai"], correct: 1},
+      {question: "Which country is known as the Land of the Rising Sun?", answers: ["China", "South Korea", "Thailand", "Japan"], correct: 3},
+      {question: "Who discovered penicillin?", answers: ["Alexander Fleming", "Marie Curie", "Isaac Newton", "Louis Pasteur"], correct: 0},
+      {question: "What is the currency of the United Kingdom?", answers: ["Dollar", "Euro", "Pound", "Yen"], correct: 2},
+      {question: "How many hearts does an octopus have?", answers: ["1", "2", "3", "4"], correct: 2},
+      {question: "Who directed 'Jurassic Park'?", answers: ["James Cameron", "George Lucas", "Steven Spielberg", "Ridley Scott"], correct: 2},
+      {question: "What is the tallest mountain in the world?", answers: ["K2", "Kangchenjunga", "Mount Everest", "Lhotse"], correct: 2},
+      {question: "Which organ is primarily responsible for filtering toxins in the body?", answers: ["Heart", "Kidneys", "Lungs", "Liver"], correct: 1},
+      {question: "What is the capital of Egypt?", answers: ["Cairo", "Lagos", "Nairobi", "Tripoli"], correct: 0},
+      {question: "What color are emeralds?", answers: ["Red", "Blue", "Green", "Yellow"], correct: 2},
+      {question: "Which country gifted the Statue of Liberty to the United States?", answers: ["Germany", "Canada", "France", "Italy"], correct: 2},
+      {question: "Who is the author of 'Harry Potter'?", answers: ["J.R.R. Tolkien", "J.K. Rowling", "George R.R. Martin", "C.S. Lewis"], correct: 1},
+      {question: "In which city would you find the Colosseum?", answers: ["Rome", "Athens", "Paris", "Istanbul"], correct: 0},
+      {question: "What is the chemical symbol for water?", answers: ["O2", "H", "H2O", "O3"], correct: 2},
+      {question: "Which planet is closest to the Sun?", answers: ["Earth", "Venus", "Mercury", "Mars"], correct: 2},
+      {question: "What is the primary gas found in the Earth's atmosphere?", answers: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Helium"], correct: 2},
+      {question: "How many bones are there in the human body?", answers: ["200", "204", "206", "208"], correct: 2},
+      {question: "Which ocean is the largest?", answers: ["Atlantic", "Indian", "Pacific", "Arctic"], correct: 2},
+      {question: "What does 'www' stand for in a website browser?", answers: ["Wide World Web", "World Wide Web", "Web World Width", "Web Wide World"], correct: 1},
+      {question: "Which animal is known as the Ship of the Desert?", answers: ["Camel", "Horse", "Elephant", "Lion"], correct: 0},
+      {question: "What type of tree do acorns come from?", answers: ["Maple", "Pine", "Oak", "Birch"], correct: 2},
+      {question: "Which country is famous for the dance Tango?", answers: ["Brazil", "Argentina", "Mexico", "Spain"], correct: 1}
+    ];
+
+    // Remaining JavaScript code omitted for brevity
+  </script>
+</body>
+</html>
