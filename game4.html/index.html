@@ -3,27 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VGAMES Memory Card Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>VGAMES</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #1e1e2d;
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: white;
+        }
+        .menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px;
+            background-color: #1bcedf;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+        }
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 100vh;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        .theme-option {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #444;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .theme-option:hover {
+            background-color: #555;
+        }
+        /* Games Layout */
+        .game-container {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-align: center;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 200;
+        }
+        .popup.open {
+            display: block;
+        }
+        #highScoreBoard {
+            margin-top: 20px;
+        }
+        .button-primary {
+            background: #1bcedf;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .tic-tac-toe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .tic-tac-toe-cell {
+            background-color: #444;
+            color: white;
+            font-size: 2em;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <div class="score" id="scoreBox">Score: <span id="score">0</span></div>
-    <div class="strike" id="strikeBox">Strikes: <span id="strikes">0</span>/3</div>
 
-    <div class="game-container">
-        <div class="card-grid" id="cardGrid">
-            <!-- Cards will be generated here by JavaScript -->
+    <!-- Sidebar and Menu Button -->
+    <button class="menu-button" onclick="toggleSidebar()">Menu</button>
+    <div class="sidebar" id="sidebar">
+        <h2>VGAMES</h2>
+        <h3>Select a Theme</h3>
+        <div class="theme-option" onclick="setTheme('space')">Space</div>
+        <div class="theme-option" onclick="setTheme('ocean')">Ocean</div>
+        <div class="theme-option" onclick="setTheme('forest')">Forest</div>
+        <div class="theme-option" onclick="setTheme('desert')">Desert</div>
+        <div class="theme-option" onclick="setTheme('city')">City</div>
+        <div class="theme-option" onclick="setTheme('sunset')">Sunset</div>
+        <div class="theme-option" onclick="setTheme('mountain')">Mountain</div>
+        <div class="theme-option" onclick="setTheme('neon')">Neon</div>
+        <div class="theme-option" onclick="setTheme('retro')">Retro</div>
+        <div class="theme-option" onclick="setTheme('galaxy')">Galaxy</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>VGAMES Hub</h1>
+        
+        <!-- Games -->
+        <div class="game-container">
+            <h2>Tic Tac Toe</h2>
+            <button class="button-primary" onclick="openPopup('ticTacToePopup')">Play Tic Tac Toe</button>
+        </div>
+        <div class="game-container">
+            <h2>Guess the Number</h2>
+            <button class="button-primary" onclick="openPopup('guessNumberPopup')">Play Guess the Number</button>
+        </div>
+        
+        <!-- High Scores -->
+        <div id="highScoreBoard">
+            <h2>High Scores</h2>
+            <div id="highScores"></div>
         </div>
     </div>
 
-    <div class="popup" id="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <p id="popupText">You scored <span id="finalScore">0</span>! Share your memory skills with friends!</p>
-            <button onclick="shareScore()">Share with Friends</button>
-        </div>
+    <!-- Game Popups -->
+    <div id="ticTacToePopup" class="popup">
+        <button onclick="closePopup('ticTacToePopup')">Close</button>
+        <h3>Tic Tac Toe</h3>
+        <div id="ticTacToeBoard" class="tic-tac-toe-grid"></div>
     </div>
+    
+    <div id="guessNumberPopup" class="popup">
+        <button onclick="closePopup('guessNumberPopup')">Close</button>
+        <h3>Guess the Number</h3>
+        <p>Guess a number between 1 and 100.</p>
+        <input type="number" id="guessInput" placeholder="Enter your guess" />
+        <button onclick="guessNumber()">Guess</button>
+        <p id="guessResult"></p>
+    </div>
+    
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
 
-    <script src="scripts.js"></script>
+        // Themes
+        function setTheme(theme) {
+            document.body.className = theme;
+            localStorage.setItem("theme", theme);
+        }
+
+        window.onload = function() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) setTheme(savedTheme);
+            displayHighScores();
+        };
+
+        // High Scores
+        function saveHighScore(game, score) {
+            const scores = JSON.parse(localStorage.getItem("highScores")) || [];
+            scores.push({ game, score });
+            localStorage.setItem("highScores", JSON.stringify(scores));
+            displayHighScores();
+        }
+
+        function displayHighScores() {
+            const scores = JSON.parse(localStorage.getItem("highScores")) || [];
+            const scoreBoard = document.getElementById("highScores");
+            scoreBoard.innerHTML = "";
+            scores.forEach(score => {
+                const scoreItem = document.createElement("div");
+                scoreItem.innerText = `${score.game}: ${score.score}`;
+                scoreBoard.appendChild(scoreItem);
+            });
+        }
+
+        // Tic Tac Toe
+        let ticTacToeBoard, currentPlayer;
+        function startTicTacToe() {
+            ticTacToeBoard = ["", "", "", "", "", "", "", "", ""];
+            currentPlayer = "X";
+            updateTicTacToeBoard();
+        }
+
+        function makeMove(index) {
+            if (ticTacToeBoard[index] === "") {
+                ticTacToeBoard[index] = currentPlayer;
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                updateTicTacToeBoard();
+            }
+        }
+
+        function updateTicTacToeBoard() {
+            const boardHTML = ticTacToeBoard.map((cell, index) => 
+                `<div class="tic-tac-toe-cell" onclick="makeMove(${index})">${cell}</div>`
+            ).join("");
+            document.getElementById("ticTacToeBoard").innerHTML = boardHTML;
+        }
+
+        // Guess the Number
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        function guessNumber() {
+            const userGuess = parseInt(document.getElementById("guessInput").value);
+            if (userGuess === randomNumber) {
+                document.getElementById("guessResult").innerText = "Correct!";
+                saveHighScore("Guess the Number", 1);
+            } else {
+                document.getElementById("guessResult").innerText = "Try again!";
+            }
+        }
+
+        // Popup Management
+        function openPopup(popupId) {
+            document.getElementById(popupId).classList.add("open");
+            if (popupId === "ticTacToePopup") startTicTacToe();
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).classList.remove("open");
+        }
+    </script>
 </body>
 </html>
