@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCloud Monitoring & Security</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>VCloud Monitoring & Security</h1>
+        <div id="auth-section">
+            <input type="password" id="password" placeholder="Enter Password">
+            <button id="login-btn">Enter</button>
+            <p id="error-msg" class="hidden">Invalid password. Try again.</p>
+        </div>
+        <div id="dashboard" class="hidden">
+            <h2>Website Status</h2>
+            <div id="status-list">
+                <!-- Website statuses will be displayed here -->
+            </div>
+            <h2>Push Video</h2>
+            <form id="video-form">
+                <input type="url" id="video-url" placeholder="Enter Video URL" required>
+                <button type="submit">Push Video</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
