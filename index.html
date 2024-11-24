@@ -69,3 +69,88 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VGAMES Index</title>
+    <link rel="icon" href="ILOGOT.jpeg" type="image/jpeg">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, pink, blue);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        .offline-banner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(45deg, red, orange);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+        .offline-banner h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .offline-banner p {
+            margin: 5px 0;
+            font-size: 1.2em;
+        }
+        .close-button {
+            background-color: white;
+            color: red;
+            border: none;
+            padding: 5px 15px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .close-button:hover {
+            background-color: lightcoral;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="offline-banner" class="offline-banner">
+        <h2>You're Offline!</h2>
+        <p>Turn on Data or Wi-Fi to continue.</p>
+        <p>If the problem persists, contact <a href="mailto:vuyaniphila86@gmail.com" style="color: yellow;">vuyaniphila86@gmail.com</a>.</p>
+        <button class="close-button" onclick="hideOfflineBanner()">Close</button>
+    </div>
+
+    <script>
+        // Function to check online/offline status
+        function checkConnection() {
+            const offlineBanner = document.getElementById('offline-banner');
+            if (navigator.onLine) {
+                offlineBanner.style.display = 'none';
+            } else {
+                offlineBanner.style.display = 'block';
+            }
+        }
+
+        // Function to hide the offline banner
+        function hideOfflineBanner() {
+            document.getElementById('offline-banner').style.display = 'none';
+        }
+
+        // Check connection on load and listen for status changes
+        window.onload = checkConnection;
+        window.addEventListener('online', checkConnection);
+        window.addEventListener('offline', checkConnection);
+    </script>
+</body>
+</html>
