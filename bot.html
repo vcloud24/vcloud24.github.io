@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCloud Monitoring & Security</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        input, button {
+            width: calc(100% - 40px);
+            margin: 10px 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff7e5f;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #feb47b;
+        }
+        .hidden {
+            display: none;
+        }
+        #error-msg {
+            color: #ff4d4d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VCloud Monitoring & Security</h1>
+        <div id="auth-section">
+            <input type="password" id="password" placeholder="Enter Password">
+            <button id="login-btn">Enter</button>
+            <p id="error-msg" class="hidden">Invalid password. Try again.</p>
+        </div>
+        <div id="dashboard" class="hidden">
+            <h2>Website Status</h2>
+            <div id="status-list">
+                <!-- Website statuses will be displayed here -->
+            </div>
+            <h2>Push Video</h2>
+            <form id="video-form">
+                <input type="url" id="video-url" placeholder="Enter Video URL" required>
+                <button type="submit">Push Video</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-btn').addEventListener('click', checkPassword);
+        document.getElementById('password').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            const correctPassword = atob('dnV5dmlsZ2FtMjAwNzIwMjQ='); // Base64 encoded password
+
+            if (password === correctPassword) {
+                document.getElementById('auth-section').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                loadWebsiteStatuses();
+            } else {
+                document.getElementById('error-msg').classList.remove('hidden');
+            }
+        }
+
+        function loadWebsiteStatuses() {
+            const websites = ['vuyani1.github.io', 'vgames1.github.io', 'vcloud24.github.io'];
+            const statusList = document.getElementById('status-list');
+            statusList.innerHTML = '';
+
+            websites.forEach(site => {
+                const listItem = document.createElement('div');
+                listItem.textContent = `Checking status of ${site}...`;
+                statusList.appendChild(listItem);
+
+                fetch(`https://${site}`)
+                    .then(response => {
+                        listItem.textContent = `${site} is Online`;
+                    })
+                    .catch(error => {
+                        listItem.textContent = `${site} is Offline`;
+                    });
+            });
+        }
+
+        document.getElementById('video-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const videoURL = document.getElementById('video-url').value;
+
+            alert(`Video URL "${videoURL}" pushed to websites.`);
+            // Logic to integrate with other sites goes here
+        });
+    </script>
+</body>
+</html>
