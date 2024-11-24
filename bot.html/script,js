@@ -1,4 +1,11 @@
-document.getElementById('login-btn').addEventListener('click', function() {
+document.getElementById('login-btn').addEventListener('click', checkPassword);
+document.getElementById('password').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        checkPassword();
+    }
+});
+
+function checkPassword() {
     const password = document.getElementById('password').value;
     const correctPassword = atob('dnV5dmlsZ2FtMjAwNzIwMjQ='); // Base64 encoded password
 
@@ -9,7 +16,7 @@ document.getElementById('login-btn').addEventListener('click', function() {
     } else {
         document.getElementById('error-msg').classList.remove('hidden');
     }
-});
+}
 
 function loadWebsiteStatuses() {
     const websites = ['vuyani1.github.io', 'vgames1.github.io', 'vcloud24.github.io'];
