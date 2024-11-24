@@ -42,6 +42,19 @@
         #error-msg {
             color: #ff4d4d;
         }
+        .preview-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid white;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 10px;
+            text-align: left;
+        }
+        iframe {
+            width: 100%;
+            height: 150px;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -66,6 +79,12 @@
     </div>
 
     <script>
+        const websites = [
+            'vuyani1.github.io',
+            'vgames1.github.io',
+            'vcloud24.github.io'
+        ];
+
         document.getElementById('login-btn').addEventListener('click', checkPassword);
         document.getElementById('password').addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
@@ -87,21 +106,29 @@
         }
 
         function loadWebsiteStatuses() {
-            const websites = ['vuyani1.github.io', 'vgames1.github.io', 'vcloud24.github.io'];
             const statusList = document.getElementById('status-list');
             statusList.innerHTML = '';
 
             websites.forEach(site => {
-                const listItem = document.createElement('div');
-                listItem.textContent = `Checking status of ${site}...`;
-                statusList.appendChild(listItem);
+                const previewBox = document.createElement('div');
+                previewBox.className = 'preview-box';
+                previewBox.innerHTML = `
+                    <h4>${site}</h4>
+                    <p>Loading...</p>
+                    <iframe src="https://${site}" sandbox="allow-scripts"></iframe>
+                `;
+                statusList.appendChild(previewBox);
 
                 fetch(`https://${site}`)
                     .then(response => {
-                        listItem.textContent = `${site} is Online`;
+                        if (response.ok) {
+                            previewBox.querySelector('p').textContent = `${site} is Online`;
+                        } else {
+                            throw new Error('Site unreachable');
+                        }
                     })
-                    .catch(error => {
-                        listItem.textContent = `${site} is Offline`;
+                    .catch(() => {
+                        previewBox.querySelector('p').textContent = `${site} is Offline`;
                     });
             });
         }
@@ -110,8 +137,30 @@
             event.preventDefault();
             const videoURL = document.getElementById('video-url').value;
 
-            alert(`Video URL "${videoURL}" pushed to websites.`);
-            // Logic to integrate with other sites goes here
+            websites.forEach(site => {
+                const iframe = document.querySelector(`iframe[src="https://${site}"]`);
+                if (iframe) {
+                    const popup = document.createElement('div');
+                    popup.style = `
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        background: black;
+                        color: white;
+                        padding: 10px;
+                        border: 2px solid white;
+                        z-index: 1000;
+                        text-align: center;
+                    `;
+                    popup.innerHTML = `
+                        <p>New Video Available:</p>
+                        <a href="${videoURL}" target="_blank" style="color: #ff7e5f;">Watch Video</a>
+                    `;
+                    iframe.contentWindow.document.body.appendChild(popup);
+                }
+            });
+
+            alert(`Video URL "${videoURL}" pushed to all websites.`);
         });
     </script>
 </body>
