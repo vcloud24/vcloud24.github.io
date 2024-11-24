@@ -12,6 +12,7 @@
             text-align: center;
             padding: 20px;
             animation: backgroundAnimation 10s ease-in-out infinite;
+            overflow-x: hidden;
         }
 
         @keyframes backgroundAnimation {
@@ -60,7 +61,7 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid white;
             border-radius: 10px;
-            margin: 20px;
+            margin: 20px 0;
             padding: 20px;
             text-align: left;
             display: inline-block;
@@ -112,6 +113,26 @@
             text-align: center;
             width: 90%;
         }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .page-button {
+            background-color: #ff7e5f;
+            color: white;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .page-button:hover {
+            background-color: #feb47b;
+        }
+
     </style>
 </head>
 <body>
@@ -132,6 +153,10 @@
                 <input type="url" id="video-url" placeholder="Enter Video URL" required>
                 <button type="submit">Push Video</button>
             </form>
+            <div class="pagination">
+                <button id="prev-page" class="page-button hidden">Previous</button>
+                <button id="next-page" class="page-button">Next</button>
+            </div>
         </div>
     </div>
 
@@ -141,6 +166,8 @@
             'vgames1.github.io',
             'vcloud24.github.io'
         ];
+
+        let currentPage = 0; // Track the current page of websites
 
         document.getElementById('login-btn').addEventListener('click', checkPassword);
         document.getElementById('password').addEventListener('keydown', function (event) {
@@ -166,51 +193,67 @@
             const statusList = document.getElementById('status-list');
             statusList.innerHTML = '';
 
-            websites.forEach(site => {
-                const previewBox = document.createElement('div');
-                previewBox.className = 'preview-box';
-                previewBox.innerHTML = `
-                    <h4>${site}</h4>
-                    <iframe src="https://${site}" sandbox="allow-scripts"></iframe>
-                    <input class="video-url-input" type="url" placeholder="Enter Video URL for ${site}" />
-                    <div class="status">Checking...</div>
-                `;
-                statusList.appendChild(previewBox);
+            const previewBox = document.createElement('div');
+            previewBox.className = 'preview-box';
+            previewBox.innerHTML = `
+                <h4>${websites[currentPage]}</h4>
+                <iframe src="https://${websites[currentPage]}" sandbox="allow-scripts"></iframe>
+                <input class="video-url-input" type="url" placeholder="Enter Video URL for ${websites[currentPage]}" />
+                <div class="status">Checking...</div>
+            `;
+            statusList.appendChild(previewBox);
 
-                const statusDiv = previewBox.querySelector('.status');
-                const videoUrlInput = previewBox.querySelector('.video-url-input');
+            const statusDiv = previewBox.querySelector('.status');
+            const videoUrlInput = previewBox.querySelector('.video-url-input');
 
-                fetch(`https://${site}`)
-                    .then(response => {
-                        if (response.ok) {
-                            statusDiv.textContent = '${site} is Online';
-                            statusDiv.classList.add('online');
-                            statusDiv.classList.remove('offline');
-                        } else {
-                            throw new Error('Site unreachable');
-                        }
-                    })
-                    .catch(() => {
-                        statusDiv.textContent = '${site} is Offline';
-                        statusDiv.classList.add('offline');
-                        statusDiv.classList.remove('online');
-                    });
-
-                videoUrlInput.addEventListener('input', function() {
-                    const videoUrl = videoUrlInput.value;
-                    if (videoUrl) {
-                        const popup = document.createElement('div');
-                        popup.className = 'popup-video';
-                        popup.innerHTML = `
-                            <p>New Video Available:</p>
-                            <a href="${videoUrl}" target="_blank" style="color: #ff7e5f;">Watch Video</a>
-                        `;
-                        previewBox.appendChild(popup);
-                        document.querySelector(`iframe[src*="${site}"]`).src = videoUrl; // Update iframe with new video URL
+            fetch(`https://${websites[currentPage]}`)
+                .then(response => {
+                    if (response.ok) {
+                        statusDiv.textContent = `${websites[currentPage]} is Online`;
+                        statusDiv.classList.add('online');
+                        statusDiv.classList.remove('offline');
+                    } else {
+                        throw new Error('Site unreachable');
                     }
+                })
+                .catch(() => {
+                    statusDiv.textContent = `${websites[currentPage]} is Offline`;
+                    statusDiv.classList.add('offline');
+                    statusDiv.classList.remove('online');
                 });
+
+            videoUrlInput.addEventListener('input', function() {
+                const videoUrl = videoUrlInput.value;
+                if (videoUrl) {
+                    const popup = document.createElement('div');
+                    popup.className = 'popup-video';
+                    popup.innerHTML = `
+                        <p>New Video Available:</p>
+                        <a href="${videoUrl}" target="_blank" style="color: #ff7e5f;">Watch Video</a>
+                    `;
+                    previewBox.appendChild(popup);
+                    document.querySelector(`iframe[src*="${websites[currentPage]}"]`).src = videoUrl; // Update iframe with new video URL
+                }
             });
+
+            // Show or hide the "Previous" and "Next" buttons based on the current page
+            document.getElementById('prev-page').classList.toggle('hidden', currentPage === 0);
+            document.getElementById('next-page').classList.toggle('hidden', currentPage === websites.length - 1);
         }
+
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                loadWebsiteStatuses();
+            }
+        });
+
+        document.getElementById('next-page').addEventListener('click', () => {
+            if (currentPage < websites.length - 1) {
+                currentPage++;
+                loadWebsiteStatuses();
+            }
+        });
 
         document.getElementById('video-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -221,95 +264,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VGAMES Index</title>
-    <link rel="icon" href="ILOGOT.jpeg" type="image/jpeg">
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, pink, blue);
-            color: white;
-            text-align: center;
-            overflow: hidden;
-        }
-        .offline-banner {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, red, orange);
-            color: white;
-            font-weight: bold;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-        }
-        .offline-banner h2 {
-            margin: 0;
-            font-size: 1.5em;
-        }
-        .offline-banner p {
-            margin: 5px 0;
-            font-size: 1.2em;
-        }
-        .close-button {
-            background-color: white;
-            color: red;
-            border: none;
-            padding: 5px 15px;
-            font-size: 1em;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .close-button:hover {
-            background-color: lightcoral;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <div id="offline-banner" class="offline-banner">
-        <h2>You're Offline!</h2>
-        <p>Turn on Data or Wi-Fi to continue.</p>
-        <p>If the problem persists, contact <a href="mailto:vuyaniphila86@gmail.com" style="color: yellow;">vuyaniphila86@gmail.com</a>.</p>
-        <button class="close-button" onclick="hideOfflineBanner()">Close</button>
-    </div>
-
-    <script>
-        // Function to check online/offline status
-        function checkConnection() {
-            const offlineBanner = document.getElementById('offline-banner');
-            if (navigator.onLine) {
-                offlineBanner.style.display = 'none';
-            } else {
-                offlineBanner.style.display = 'block';
-            }
-        }
-
-        // Function to hide the offline banner
-        function hideOfflineBanner() {
-            document.getElementById('offline-banner').style.display = 'none';
-        }
-
-        // Check connection on load and listen for status changes
-        window.onload = checkConnection;
-        window.addEventListener('online', checkConnection);
-        window.addEventListener('offline', checkConnection);
-    </script>
-</body>
-</html>
-
