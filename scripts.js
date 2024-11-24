@@ -49,3 +49,17 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('timeDisplay').textContent = new Date().toLocaleTimeString();
     }, 1000);
 });
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('https://vcloud24.github.io/bot.html')
+            .then(() => {
+                console.log('Connected to monitoring system.');
+            })
+            .catch(() => {
+                console.error('Failed to connect to monitoring system.');
+            });
+    });
+</script>
+<a href="https://vcloud24.github.io/bot.html" target="_blank">Visit Monitoring System</a>
