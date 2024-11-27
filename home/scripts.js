@@ -46,3 +46,5 @@ document.getElementById('search-btn').addEventListener('click', () => {
         alert("No results found.");
     }
 });
+
+
