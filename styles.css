@@ -1,4 +1,4 @@
-/* General styling */
+/* General Styling */
 body, html {
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@ body, html {
 #slider {
     position: relative;
     height: 100vh;
-    background: linear-gradient(45deg, #ff69b4, #00bfff);
+    background: linear-gradient(45deg, #ff0000, #008000);
     animation: bgAnimation 8s infinite alternate;
     display: flex;
     align-items: center;
@@ -17,9 +17,9 @@ body, html {
 }
 
 @keyframes bgAnimation {
-    0% { background: linear-gradient(45deg, #ff69b4, #00bfff); }
-    50% { background: linear-gradient(45deg, #00bfff, #ff69b4); }
-    100% { background: linear-gradient(45deg, #ff69b4, #00bfff); }
+    0% { background: linear-gradient(45deg, #ff0000, #008000); }
+    50% { background: linear-gradient(45deg, #008000, #ff0000); }
+    100% { background: linear-gradient(45deg, #ff0000, #008000); }
 }
 
 .slide {
@@ -42,10 +42,16 @@ body, html {
     animation: glowAndJump 5s infinite alternate;
 }
 
+.christmas-message {
+    font-size: 1.5em;
+    color: gold;
+    margin-top: 10px;
+}
+
 @keyframes glowAndJump {
-    0% { color: #ff69b4; transform: translateX(0); }
-    50% { color: #00bfff; transform: translateX(10px); }
-    100% { color: #ff69b4; transform: translateX(-10px); }
+    0% { color: #ff0000; transform: translateX(0); }
+    50% { color: #008000; transform: translateX(10px); }
+    100% { color: #ff0000; transform: translateX(-10px); }
 }
 
 button {
@@ -67,13 +73,13 @@ button:hover {
 .game-title {
     font-size: 3.5em;
     text-transform: uppercase;
-    color: #ff69b4;
+    color: gold;
     animation: colorChange 3s infinite alternate;
 }
 
 @keyframes colorChange {
-    0% { color: #ff69b4; }
-    100% { color: #00bfff; }
+    0% { color: gold; }
+    100% { color: #ff0000; }
 }
 
 .game-links a {
@@ -99,4 +105,3 @@ button:hover {
 @media (min-width: 768px) {
     .pc-only { display: block; }
 }
-
