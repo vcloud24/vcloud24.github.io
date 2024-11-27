@@ -1,6 +1,11 @@
 document.getElementById('search-btn').addEventListener('click', () => {
     const searchQuery = document.getElementById('search-input').value.toLowerCase();
     const links = [
+        { name: "VGAMES Home", url: "https://vcloud24.github.io/", preview: "https://via.placeholder.com/150/FF0000/FFFFFF?text=VGAMES" },
+        { name: "Ludo Game", url: "https://vcloud24.github.io/ludo.html/", preview: "https://via.placeholder.com/150/33CC33/FFFFFF?text=Ludo+Game" },
+        { name: "Tic Tac Toe", url: "https://vcloud24.github.io/TIC-TAC-TOE.html/", preview: "https://via.placeholder.com/150/FF9900/FFFFFF?text=Tic+Tac+Toe" },
+        { name: "Trivia Game (PC)", url: "https://vcloud24.github.io/game3.html/", note: "Trivia only for PC", preview: "https://via.placeholder.com/150/0000FF/FFFFFF?text=Trivia+PC" },
+        { name: "Trivia Game (Mobile)", url: "https://vcloud24.github.io/zax.html", note: "Trivia for mobile", preview: "https://via.placeholder.com/150/FFFF00/000000?text=Trivia+Mobile" },
         { name: "VGAMES Home", url: "https://vcloud24.github.io/" },
         { name: "Ludo Game", url: "https://vcloud24.github.io/ludo.html/" },
         { name: "Tic Tac Toe", url: "https://vcloud24.github.io/TIC-TAC-TOE.html/" },
@@ -17,34 +22,35 @@ document.getElementById('search-btn').addEventListener('click', () => {
         { name: "Unscramble Game", url: "https://vgames1.github.io/scram.html" },
         { name: "AI Feature", url: "https://vgames1.github.io/vai.html" },
         { name: "Adventure Game", url: "https://vgames1.github.io/adventure.html", note: "Off limits until February 2025" },
-        { name: "HTML File Previewer", url: "https://vcloud24.github.io/lo" }
+        { name: "HTML File Previewer", url: "https://vcloud24.github.io/lo" }  
+        { name: "Adventure Game", url: "https://vgames1.github.io/adventure.html", note: "Off limits until February 2025", preview: "https://via.placeholder.com/150/CC00CC/FFFFFF?text=Adventure+Game" },
+        // Add remaining links...
+
     ];
 
     const results = links.filter(link => link.name.toLowerCase().includes(searchQuery));
 
+    let popup = window.open("", "Search Results", "width=600,height=800");
+    popup.document.write(`
+        <div id="popup-container">
+            <h1>Search Results</h1>
+    `);
+
     if (results.length > 0) {
-        let popup = window.open("", "Search Results", "width=500,height=600");
-        popup.document.write("<h1>Search Results</h1>");
         results.forEach(result => {
-            if (result.name === "Adventure Game") {
-                popup.document.write(
-                    `<p>${result.name} - <em>${result.note}</em> <strong>Unavailable</strong></p>`
-                );
-            } else if (result.restricted) {
-                popup.document.write(
-                    `<p>${result.name} - <strong>Restricted Access</strong></p>`
-                );
-            } else {
-                popup.document.write(
-                    `<p><a href="${result.url}" target="_blank">${result.name}</a> ${
-                        result.note ? ` - <em>${result.note}</em>` : ""
-                    }</p>`
-                );
-            }
+            popup.document.write(`
+                <div style="margin-bottom: 15px;">
+                    <img src="${result.preview}" alt="${result.name} Preview" style="width: 100px; border-radius: 10px;" />
+                    <p>
+                        <a href="${result.url}" target="_blank">${result.name}</a>
+                        ${result.note ? `<em>- ${result.note}</em>` : ""}
+                    </p>
+                </div>
+            `);
         });
     } else {
-        alert("No results found.");
+        popup.document.write(`<p>No results found for your search.</p>`);
     }
+
+    popup.document.write("</div>");
 });
-
-
