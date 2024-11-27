@@ -1,17 +1,18 @@
-/* General Styling */
+/* General Styling with Minecraft Theme */
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Minecraft', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #ff4d4d, #33cc33, #ffffff); /* Christmas colors */
+    background: url('https://via.placeholder.com/1920x1080?text=Minecraft+Background') no-repeat center center fixed;
+    background-size: cover;
     color: #fff;
     text-align: center;
 }
 
 header {
     padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: 3px solid #5a3b1c;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -20,12 +21,14 @@ header {
 #vgames-logo {
     font-size: 3em;
     text-transform: uppercase;
-    animation: glowingText 2s infinite alternate;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #5a3b1c;
+    animation: glow 2s infinite alternate;
 }
 
-@keyframes glowingText {
-    0% { color: #ff0000; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
-    100% { color: #33cc33; text-shadow: 0 0 10px #33cc33, 0 0 20px #33cc33; }
+@keyframes glow {
+    0% { text-shadow: 0 0 10px #00ff00, 0 0 20px #5a3b1c; }
+    100% { text-shadow: 0 0 15px #5a3b1c, 0 0 30px #00ff00; }
 }
 
 #search-bar {
@@ -35,27 +38,27 @@ header {
 #search-input {
     width: 60%;
     padding: 10px;
-    border-radius: 20px;
-    border: none;
+    border-radius: 10px;
+    border: 2px solid #5a3b1c;
     font-size: 1em;
     outline: none;
 }
 
 #search-btn {
     padding: 10px 20px;
-    background: #ff0000;
+    background: #5a3b1c;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
 
 #search-btn:hover {
-    background: #33cc33;
+    background: #00ff00;
 }
 
-/* Windows */
+/* Windows with Minecraft Panels */
 #windows-container {
     display: flex;
     justify-content: space-around;
@@ -66,10 +69,11 @@ header {
 
 .window {
     width: 30%;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.7);
     padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    border: 2px solid #5a3b1c;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
     margin: 15px;
 }
 
@@ -78,45 +82,36 @@ header {
     height: 200px;
     background-size: cover;
     background-position: center;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 10px;
 }
 
 h2 {
-    color: #ff0000;
-    text-shadow: 0 0 10px #ff0000;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
 }
 
-/* Search Popup Styling */
+/* Popup Styling */
 #popup-container {
-    background: linear-gradient(to bottom, #ff4d4d, #33cc33, #ffffff);
-    color: #000;
+    background: rgba(0, 0, 0, 0.8);
+    color: #00ff00;
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 10px;
     max-width: 500px;
     margin: 0 auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-#popup-container h1 {
-    font-size: 1.8em;
-    color: #ff0000;
-    text-shadow: 0 0 10px #ff0000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 #popup-container a {
-    color: #33cc33;
+    color: #5a3b1c;
     text-decoration: none;
     font-weight: bold;
 }
 
-#popup-container a:hover {
-    color: #ff0000;
-}
-
 footer {
     padding: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 3px solid #5a3b1c;
     font-size: 0.9em;
+    text-shadow: 0 0 5px #00ff00;
 }
