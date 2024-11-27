@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VGAMES Home</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="ILOGOT.jpeg" type="image/jpeg">
+    <link rel="icon" href="minecraft-icon.png" type="image/png">
 </head>
 <body>
     <header>
         <h1 id="vgames-logo">VGAMES</h1>
         <div id="search-bar">
-            <input type="text" id="search-input" placeholder="Search for games or topics..." />
+            <input type="text" id="search-input" list="suggestions" placeholder="Search games or topics..." />
+            <datalist id="suggestions"></datalist>
             <button id="search-btn">Search</button>
         </div>
     </header>
