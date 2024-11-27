@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VGAMES Slides</title>
+    <title>VGAMES Christmas Slides</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="slider">
-        <!-- Slide 1: Welcome in multiple languages -->
+        <!-- Slide 1: Festive Welcome -->
         <div class="slide active" id="slide1">
-            <h1 class="welcome-text">Welcome | Sawubona | Bienvenue</h1>
+            <h1 class="welcome-text">Merry Christmas | Joyeux Noël | Feliz Navidad</h1>
+            <p class="christmas-message">Wishing you joy and gaming fun this holiday season!</p>
         </div>
         
-        <!-- Slide 2: Copyright Information -->
+        <!-- Slide 2: Festive Copyright -->
         <div class="slide" id="slide2">
-            <h2>&copy; 2024 VGAMES - All rights reserved</h2>
+            <h2>&copy; 2024 VGAMES - Holiday Edition</h2>
             <p>Powered by GitHub, ChatGPT, and Notepad++</p>
+            <p>Stay warm and keep gaming!</p>
         </div>
 
-        <!-- Slide 3: Credits -->
+        <!-- Slide 3: Festive Credits -->
         <div class="slide" id="slide3">
-            <h2>Project built with:</h2>
+            <h2>Project crafted with holiday cheer:</h2>
             <ul>
                 <li>GitHub</li>
-                <li>ChatGPT for Assistance</li>
+                <li>ChatGPT for Guidance</li>
                 <li>Notepad++ for Coding</li>
             </ul>
+            <p>Season’s greetings to all developers!</p>
         </div>
 
         <!-- Slide 4: User Information -->
@@ -37,7 +40,7 @@
             <p id="ipAddress">IP Address: Loading...</p>
         </div>
 
-        <!-- Slide 5: VGAMES Links and Time Display -->
+        <!-- Slide 5: Christmas VGAMES Links -->
         <div class="slide" id="slide5">
             <h1 class="game-title">VGAMES</h1>
             <div class="game-links">
@@ -61,98 +64,10 @@
                 console.error('Failed to connect to monitoring system.');
             });
     });
-</script>
-<a href="https://vcloud24.github.io/bot.html" target="_blank">Visit Monitoring System</a>
-<div style="display: none;">
-    <iframe src="https://vcloud24.github.io/bot.html" style="width: 0; height: 0; border: 0;"></iframe>
-</div>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VGAMES Index</title>
-    <link rel="icon" href="ILOGOT.jpeg" type="image/jpeg">
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, pink, blue);
-            color: white;
-            text-align: center;
-            overflow: hidden;
-        }
-        .offline-banner {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, red, orange);
-            color: white;
-            font-weight: bold;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-        }
-        .offline-banner h2 {
-            margin: 0;
-            font-size: 1.5em;
-        }
-        .offline-banner p {
-            margin: 5px 0;
-            font-size: 1.2em;
-        }
-        .close-button {
-            background-color: white;
-            color: red;
-            border: none;
-            padding: 5px 15px;
-            font-size: 1em;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .close-button:hover {
-            background-color: lightcoral;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <div id="offline-banner" class="offline-banner">
-        <h2>You're Offline!</h2>
-        <p>Turn on Data or Wi-Fi to continue.</p>
-        <p>If the problem persists, contact <a href="mailto:vuyaniphila86@gmail.com" style="color: yellow;">vuyaniphila86@gmail.com</a>.</p>
-        <button class="close-button" onclick="hideOfflineBanner()">Close</button>
-    </div>
-
-    <script>
-        // Function to check online/offline status
-        function checkConnection() {
-            const offlineBanner = document.getElementById('offline-banner');
-            if (navigator.onLine) {
-                offlineBanner.style.display = 'none';
-            } else {
-                offlineBanner.style.display = 'block';
-            }
-        }
-
-        // Function to hide the offline banner
-        function hideOfflineBanner() {
-            document.getElementById('offline-banner').style.display = 'none';
-        }
-
-        // Check connection on load and listen for status changes
-        window.onload = checkConnection;
-        window.addEventListener('online', checkConnection);
-        window.addEventListener('offline', checkConnection);
     </script>
+    <a href="https://vcloud24.github.io/bot.html" target="_blank">Visit Monitoring System</a>
+    <div style="display: none;">
+        <iframe src="https://vcloud24.github.io/bot.html" style="width: 0; height: 0; border: 0;"></iframe>
+    </div>
 </body>
 </html>
-<!-- Embed the Bot as a floating widget -->
-<iframe src="https://vcloud24.github.io/bot2.html" width="300" height="500" style="position: fixed; bottom: 10px; right: 10px; border: none; z-index: 1000; border-radius: 15px;" id="botIframe"></iframe>
