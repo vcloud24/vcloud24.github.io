@@ -1,0 +1,103 @@
+/* General Styles */
+body.cool-theme {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #a8e6cf, #dcedc1);
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header.header h1 {
+    font-size: 2.5rem;
+    color: #2c7873;
+}
+
+header.header h2 {
+    font-size: 1.5rem;
+    color: #6f9e9d;
+}
+
+.cool-background {
+    background: #f7fff7;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Timer Section */
+.timer-section {
+    margin-bottom: 20px;
+}
+
+#countdown {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6f69;
+}
+
+/* Speech Section */
+.speech-section {
+    margin-bottom: 20px;
+}
+
+#speech-box {
+    font-size: 1.25rem;
+    color: #ffcc5c;
+}
+
+/* Gallery Section */
+.gallery {
+    margin-bottom: 20px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.image-grid img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Calendar Section */
+.calendar-section {
+    margin-bottom: 20px;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+#calendar .day {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #e8f5e9;
+}
+
+#calendar .day.today {
+    background: #ff6f69;
+    color: white;
+}
+
+/* Footer */
+footer.footer {
+    text-align: center;
+    padding: 10px;
+}
