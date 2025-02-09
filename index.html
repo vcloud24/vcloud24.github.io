@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unbeatable Tic Tac Toe - Hardcore Mode</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #ff4444;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+    }
+    .logo {
+      margin: 20px auto;
+    }
+    .ad {
+      margin: 20px auto;
+      width: 300px;
+      height: 100px;
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+      margin: 20px auto;
+      justify-content: center;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .cell:hover {
+      background-color: #444;
+    }
+    .scoreboard {
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo Embed -->
+  <div class="logo">
+    <div style="position: relative; width: 100%; height: 0; padding-top: 100.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;">
+      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAGeli_tzpA/Rl41muKHBPWhrNYszSuhyw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+    </div>
+    <a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGeli_tzpA&#x2F;Rl41muKHBPWhrNYszSuhyw&#x2F;view?utm_content=DAGeli_tzpA&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Black White Minimalist Initials Monogram Jewelry Logo</a> by Vuyani Siyanda Vilakazi
+  </div>
+
+  <!-- Ad Space -->
+  <div class="ad">Ad Space</div>
+
+  <!-- Game Board -->
+  <div class="board" id="board">
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+  </div>
+
+  <!-- Scoreboard -->
+  <div class="scoreboard">
+    <p>Wins: <span id="wins">0</span></p>
+    <p>Losses: <span id="losses">0</span></p>
+    <p>Time: <span id="time">00:00</span></p>
+  </div>
+
+  <!-- Ad Space -->
+  <div class="ad">Ad Space</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
