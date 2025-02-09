@@ -17,28 +17,61 @@ document.getElementById('name').textContent = playerInfo.name;
 document.getElementById('wins').textContent = playerInfo.wins;
 document.getElementById('losses').textContent = playerInfo.losses;
 document.getElementById('time').textContent = `${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s`;
-document.getElementById('mode').textContent = playerInfo.mode;
 document.getElementById('timeDate').textContent = playerInfo.timeDate;
 
-// Share button functionality
-document.getElementById('shareButton').addEventListener('click', () => {
-  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nMode: ${playerInfo.mode}\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+// Custom Modal
+const customModal = document.getElementById('customModal');
+const modalMessage = document.getElementById('modalMessage');
+const modalButton = document.getElementById('modalButton');
 
-  // Share to WhatsApp
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
-  
-  // Share to Facebook
+function showModal(message) {
+  modalMessage.textContent = message;
+  customModal.style.display = 'block';
+}
+
+modalButton.addEventListener('click', () => {
+  customModal.style.display = 'none';
+});
+
+// Copy Shareable Link
+document.getElementById('copyLinkButton').addEventListener('click', () => {
+  const shareableLink = `https://vcloud24.github.io/friend?info=${encodeURIComponent(encryptedData)}`;
+  navigator.clipboard.writeText(shareableLink).then(() => {
+    showModal('Link copied to clipboard!');
+  });
+});
+
+// Share on Facebook
+document.getElementById('facebookButton').addEventListener('click', () => {
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
   const facebookUrl = `https://www.facebook.com/profile.php?id=61572881767013&message=${encodeURIComponent(shareMessage)}`;
+  window.open(facebookUrl, '_blank');
+});
 
-  // Open share options
-  const shareOption = prompt('Share to:\n1. WhatsApp\n2. Facebook\nEnter 1 or 2:');
-  if (shareOption === '1') {
-    window.open(whatsappUrl, '_blank');
-  } else if (shareOption === '2') {
-    window.open(facebookUrl, '_blank');
-  } else {
-    alert('Invalid option.');
-  }
+// Share on WhatsApp
+document.getElementById('whatsappButton').addEventListener('click', () => {
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+  window.open(whatsappUrl, '_blank');
+});
+
+// Share on Twitter
+document.getElementById('twitterButton').addEventListener('click', () => {
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}`;
+  window.open(twitterUrl, '_blank');
+});
+
+// Share on LinkedIn
+document.getElementById('linkedinButton').addEventListener('click', () => {
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://vcloud24.github.io')}&summary=${encodeURIComponent(shareMessage)}`;
+  window.open(linkedinUrl, '_blank');
+});
+
+// Send Feedback
+document.getElementById('feedbackButton').addEventListener('click', () => {
+  window.location.href = `mailto:vilakazigames@gmail.com?subject=Tic%20Tac%20Toe%20Feedback&body=Your%20feedback%20here...`;
 });
 
 // Disable right-click and Inspect
