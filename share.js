@@ -17,13 +17,11 @@ document.getElementById('name').textContent = playerInfo.name;
 document.getElementById('wins').textContent = playerInfo.wins;
 document.getElementById('losses').textContent = playerInfo.losses;
 document.getElementById('time').textContent = `${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s`;
-
-// Prevent user from modifying the data
-Object.freeze(playerInfo); // Freeze the object to prevent changes
+document.getElementById('mode').textContent = playerInfo.mode;
 
 // Share button functionality
 document.getElementById('shareButton').addEventListener('click', () => {
-  const shareMessage = `Check out my Tic Tac Toe results!\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s`;
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nMode: ${playerInfo.mode}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
 
   // Share to WhatsApp
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
@@ -39,5 +37,14 @@ document.getElementById('shareButton').addEventListener('click', () => {
     window.open(facebookUrl, '_blank');
   } else {
     alert('Invalid option.');
+  }
+});
+
+// Disable right-click and Inspect
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+    e.preventDefault();
+    alert('Inspect is disabled.');
   }
 });
