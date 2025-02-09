@@ -18,10 +18,11 @@ document.getElementById('wins').textContent = playerInfo.wins;
 document.getElementById('losses').textContent = playerInfo.losses;
 document.getElementById('time').textContent = `${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s`;
 document.getElementById('mode').textContent = playerInfo.mode;
+document.getElementById('timeDate').textContent = playerInfo.timeDate;
 
 // Share button functionality
 document.getElementById('shareButton').addEventListener('click', () => {
-  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nMode: ${playerInfo.mode}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nMode: ${playerInfo.mode}\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
 
   // Share to WhatsApp
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
