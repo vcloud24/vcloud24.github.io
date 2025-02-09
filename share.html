@@ -44,6 +44,7 @@
       <p><strong>Wins:</strong> <span id="wins"></span></p>
       <p><strong>Losses:</strong> <span id="losses"></span></p>
       <p><strong>Time Played:</strong> <span id="time"></span></p>
+      <p><strong>Mode:</strong> <span id="mode"></span></p>
     </div>
     <button class="share-button" id="shareButton">Share Your Results</button>
   </div>
@@ -52,11 +53,3 @@
   <script src="share.js"></script>
 </body>
 </html>
-// Disable right-click and Inspect
-document.addEventListener('contextmenu', (e) => e.preventDefault());
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-    e.preventDefault();
-    alert('Inspect is disabled.');
-  }
-});
