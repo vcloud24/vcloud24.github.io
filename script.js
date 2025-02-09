@@ -14,7 +14,7 @@ let losses = 0;
 let time = 0;
 let playerTurn = true;
 let boardState = ['', '', '', '', '', '', '', '', ''];
-let gameMode = null; // 'easy' or 'hardcore'
+let playerName = '';
 
 // Show custom modal
 function showModal(message, callback) {
@@ -30,21 +30,12 @@ function showModal(message, callback) {
   customModal.style.display = 'block';
 }
 
-// Hide custom modal
-modalButton.addEventListener('click', () => {
-  customModal.style.display = 'none';
-});
-
 // Boot-up screen
 setTimeout(() => {
   bootScreen.style.display = 'none';
-  showModal('Choose your mode:\n1. Easy\n2. Hardcore', (mode) => {
-    gameMode = mode.toLowerCase();
-    if (gameMode === 'easy' || gameMode === 'hardcore') {
-      customModal.style.display = 'none';
-    } else {
-      showModal('Invalid mode. Please choose Easy or Hardcore.');
-    }
+  showModal('Enter your name to start the game:', (name) => {
+    playerName = name;
+    customModal.style.display = 'none';
   });
 }, 2000); // Simulate 2-second boot-up
 
@@ -190,20 +181,17 @@ function resetGame() {
   playerTurn = true;
 
   if (losses === 2) {
-    showModal('You lost twice! Enter your name:', (playerName) => {
-      const now = new Date();
-      const timeDate = now.toLocaleString();
-      const data = JSON.stringify({
-        name: playerName,
-        wins,
-        losses,
-        time,
-        mode: gameMode,
-        timeDate
-      });
-      const encryptedData = CryptoJS.AES.encrypt(data, 'secret-key').toString();
-      window.location.href = `https://vcloud24.github.io/share?info=${encodeURIComponent(encryptedData)}`;
+    const now = new Date();
+    const timeDate = now.toLocaleString();
+    const data = JSON.stringify({
+      name: playerName,
+      wins,
+      losses,
+      time,
+      timeDate
     });
+    const encryptedData = CryptoJS.AES.encrypt(data, 'secret-key').toString();
+    window.location.href = `https://vcloud24.github.io/share?info=${encodeURIComponent(encryptedData)}`;
   }
 }
 
