@@ -1,104 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Share Your Results</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #1a1a1a;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .logo {
-      width: 150px;
-      margin: 20px auto;
-    }
-    .player-info {
-      background-color: #333;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .share-button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      margin: 5px;
-    }
-    .share-button:hover {
-      background-color: #0056b3;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #333;
-      padding: 20px;
-      border-radius: 8px;
-      z-index: 1001;
-    }
-    .modal-content {
-      text-align: center;
-    }
-    .modal button {
-      margin: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <!-- Logo Embed -->
-  <div class="logo">
-    <div style="position: relative; width: 100%; height: 0; padding-top: 100.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;">
-      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAGeli_tzpA/Rl41muKHBPWhrNYszSuhyw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-    </div>
-  </div>
+// Decrypt data from URL
+const urlParams = new URLSearchParams(window.location.search);
+const encryptedData = urlParams.get('info');
 
-  <!-- Player Info -->
-  <div class="container">
-    <h1>Your Game Results</h1>
-    <div class="player-info">
-      <p><strong>Name:</strong> <span id="name"></span></p>
-      <p><strong>Wins:</strong> <span id="wins"></span></p>
-      <p><strong>Losses:</strong> <span id="losses"></span></p>
-      <p><strong>Time Played:</strong> <span id="time"></span></p>
-      <p><strong>Date & Time:</strong> <span id="timeDate"></span></p>
-    </div>
+if (!encryptedData) {
+  alert('No data found in the URL.');
+  window.location.href = 'https://vcloud24.github.io'; // Redirect to home if no data
+}
 
-    <!-- Share Buttons -->
-    <button class="share-button" id="copyLinkButton">Copy Shareable Link</button>
-    <button class="share-button" id="facebookButton">Share on Facebook</button>
-    <button class="share-button" id="whatsappButton">Share on WhatsApp</button>
-    <button class="share-button" id="twitterButton">Share on Twitter</button>
-    <button class="share-button" id="linkedinButton">Share on LinkedIn</button>
-    <button class="share-button" id="feedbackButton">Send Feedback</button>
-  </div>
+// Decrypt the data (AES encryption)
+const secretKey = 'secret-key'; // Must match the key used for encryption
+const bytes = CryptoJS.AES.decrypt(decodeURIComponent(encryptedData), secretKey);
+const playerInfo = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-  <!-- Custom Modal -->
-  <div class="modal" id="customModal">
-    <div class="modal-content">
-      <p id="modalMessage"></p>
-      <button id="modalButton">OK</button>
-    </div>
-  </div>
+// Display player info
+document.getElementById('name').textContent = playerInfo.name;
+document.getElementById('wins').textContent = playerInfo.wins;
+document.getElementById('losses').textContent = playerInfo.losses;
+document.getElementById('time').textContent = `${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s`;
+document.getElementById('timeDate').textContent = playerInfo.timeDate;
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="share.js"></script>
-</body>
-</html>
+// Custom Modal
+const customModal = document.getElementById('customModal');
+const modalMessage = document.getElementById('modalMessage');
+const modalButton = document.getElementById('modalButton');
+
+function showModal(message) {
+  modalMessage.textContent = message;
+  customModal.style.display = 'block';
+}
+
+modalButton.addEventListener('click', () => {
+  customModal.style.display = 'none';
+});
+
+// Copy Shareable Link
+document.getElementById('copyLinkButton').addEventListener('click', () => {
+  const shareableLink = `https://vcloud24.github.io/friend?info=${encodeURIComponent(encryptedData)}`;
+  navigator.clipboard.writeText(shareableLink).then(() => {
+    showModal('Link copied to clipboard!');
+  });
+});
+
+// Share on Facebook
+document.getElementById('facebookButton').addEventListener('click', () => {
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+  const facebookUrl = `https://www.facebook.com/profile.php?id=61572881767013&message=${encodeURIComponent(shareMessage)}`;
+  window.open(facebookUrl, '_blank');
+});
+
+// Share on WhatsApp
+document.getElementById('whatsappButton').addEventListener('click', () => {
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+  window.open(whatsappUrl, '_blank');
+});
+
+// Share on Twitter
+document.getElementById('twitterButton').addEventListener('click', () => {
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}`;
+  window.open(twitterUrl, '_blank');
+});
+
+// Share on LinkedIn
+document.getElementById('linkedinButton').addEventListener('click', () => {
+  const shareMessage = `🎮 Tic Tac Toe Results:\nName: ${playerInfo.name}\nWins: ${playerInfo.wins}\nLosses: ${playerInfo.losses}\nTime Played: ${Math.floor(playerInfo.time / 60)}m ${playerInfo.time % 60}s\nDate & Time: ${playerInfo.timeDate}\n\nCan you beat the bot? Try it here: vcloud24.github.io`;
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://vcloud24.github.io')}&summary=${encodeURIComponent(shareMessage)}`;
+  window.open(linkedinUrl, '_blank');
+});
+
+// Send Feedback
+document.getElementById('feedbackButton').addEventListener('click', () => {
+  window.location.href = `mailto:vilakazigames@gmail.com?subject=Tic%20Tac%20Toe%20Feedback&body=Your%20feedback%20here...`;
+});
+
+// Disable right-click and Inspect
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+    e.preventDefault();
+    alert('Inspect is disabled.');
+  }
+});
