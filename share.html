@@ -52,3 +52,11 @@
   <script src="share.js"></script>
 </body>
 </html>
+// Disable right-click and Inspect
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+    e.preventDefault();
+    alert('Inspect is disabled.');
+  }
+});
