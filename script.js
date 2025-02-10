@@ -1,52 +1,38 @@
 const board = document.getElementById('board');
 const cells = document.querySelectorAll('.cell');
-const player1WinsDisplay = document.getElementById('player1Wins');
-const player2WinsDisplay = document.getElementById('player2Wins');
+const winsDisplay = document.getElementById('wins');
+const lossesDisplay = document.getElementById('losses');
 const timeDisplay = document.getElementById('time');
 const bootScreen = document.getElementById('bootScreen');
 const customModal = document.getElementById('customModal');
 const modalMessage = document.getElementById('modalMessage');
-const modalInputName1 = document.getElementById('modalInputName1');
-const modalInputAge1 = document.getElementById('modalInputAge1');
-const modalInputGender1 = document.getElementById('modalInputGender1');
-const modalInputName2 = document.getElementById('modalInputName2');
-const modalInputAge2 = document.getElementById('modalInputAge2');
-const modalInputGender2 = document.getElementById('modalInputGender2');
+const modalInputName = document.getElementById('modalInputName');
+const modalInputAge = document.getElementById('modalInputAge');
+const modalInputGender = document.getElementById('modalInputGender');
 const modalButton = document.getElementById('modalButton');
-const modeSelect = document.getElementById('modeSelect');
 
-let player1Wins = 0;
-let player2Wins = 0;
+let wins = 0;
+let losses = 0;
 let time = 0;
 let playerTurn = true;
 let boardState = ['', '', '', '', '', '', '', '', ''];
-let player1Name = '';
-let player1Age = '';
-let player1Gender = '';
-let player2Name = '';
-let player2Age = '';
-let player2Gender = '';
-let isSinglePlayer = true;
+let playerName = '';
+let playerAge = '';
+let playerGender = '';
 
 // Show custom modal
 function showModal(message, callback) {
   modalMessage.textContent = message;
-  modalInputName1.style.display = 'block';
-  modalInputAge1.style.display = 'block';
-  modalInputGender1.style.display = 'block';
-  modalInputName2.style.display = isSinglePlayer ? 'none' : 'block';
-  modalInputAge2.style.display = isSinglePlayer ? 'none' : 'block';
-  modalInputGender2.style.display = isSinglePlayer ? 'none' : 'block';
+  modalInputName.style.display = 'block';
+  modalInputAge.style.display = 'block';
+  modalInputGender.style.display = 'block';
   modalButton.onclick = () => {
-    const name1 = modalInputName1.value.trim();
-    const age1 = modalInputAge1.value.trim();
-    const gender1 = modalInputGender1.value.trim();
-    const name2 = isSinglePlayer ? 'AI' : modalInputName2.value.trim();
-    const age2 = isSinglePlayer ? '0' : modalInputAge2.value.trim();
-    const gender2 = isSinglePlayer ? 'AI' : modalInputGender2.value.trim();
-    if (name1 && age1 && gender1 && (isSinglePlayer || (name2 && age2 && gender2))) {
+    const nameValue = modalInputName.value.trim();
+    const ageValue = modalInputAge.value.trim();
+    const genderValue = modalInputGender.value.trim();
+    if (nameValue && ageValue && genderValue) {
       customModal.style.display = 'none';
-      callback(name1, age1, gender1, name2, age2, gender2);
+      callback(nameValue, ageValue, genderValue);
     }
   };
   customModal.style.display = 'block';
@@ -55,25 +41,13 @@ function showModal(message, callback) {
 // Boot-up screen
 setTimeout(() => {
   bootScreen.style.display = 'none';
-  modeSelect.style.display = 'block';
-}, 2000); // Simulate 2-second boot-up
-
-// Select Game Mode
-function selectMode(mode) {
-  isSinglePlayer = mode === 'single';
-  modeSelect.style.display = 'none';
-  showModal('Enter player details to start the game:', (name1, age1, gender1, name2, age2, gender2) => {
-    player1Name = name1;
-    player1Age = age1;
-    player1Gender = gender1;
-    player2Name = name2;
-    player2Age = age2;
-    player2Gender = gender2;
+  showModal('Enter your details to start the game:', (name, age, gender) => {
+    playerName = name;
+    playerAge = age;
+    playerGender = gender;
     customModal.style.display = 'none';
   });
-}
-
-// Rest of the JavaScript code remains the same as before...
+}, 2000); // Simulate 2-second boot-up
 
 // Minimax Algorithm
 function minimax(board, depth, isMaximizing) {
