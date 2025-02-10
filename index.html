@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unbeatable Tic Tac Toe - Hardcore Mode VCLOUD24</title>
+  <title>Unbeatable Tic Tac Toe - Hardcore Mode</title>
   <style>
     body {
       background-color: #1a1a1a;
@@ -12,9 +12,6 @@
       text-align: center;
       margin: 0;
       padding: 0;
-      background-image: url('https://www.canva.com/design/DAGeunWP-PQ/0SJj0kwVaB5UzVhQcY7t-w/view');
-      background-size: cover;
-      background-position: center;
     }
     .boot-screen {
       position: fixed;
@@ -90,7 +87,7 @@
     .modal-content {
       text-align: center;
     }
-    .modal input, .modal select {
+    .modal input {
       margin: 10px 0;
       padding: 10px;
       width: 80%;
@@ -104,22 +101,12 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    .mode-select {
-      margin: 20px auto;
-    }
-    .mode-select button {
-      margin: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
   <!-- Boot-Up Screen -->
   <div class="boot-screen" id="bootScreen">
-    RETURN TO WHERE YOU CAME YOU WON'T WIN ON BOT.
+    Prepping Hardcore Mode... Please wait.
   </div>
 
   <!-- Logo Embed -->
@@ -129,14 +116,8 @@
     </div>
   </div>
 
-  <!-- Mode Select -->
-  <div class="mode-select" id="modeSelect">
-    <button onclick="selectMode('single')">Single Player</button>
-    <button onclick="selectMode('multi')">Two Players</button>
-  </div>
-
   <!-- Ad Space -->
-  <div class="ad">Ad Space</div>
+  <div class="ad">NO ADS</div>
 
   <!-- Game Board -->
   <div class="board" id="board">
@@ -153,8 +134,8 @@
 
   <!-- Scoreboard -->
   <div class="scoreboard">
-    <p>Player 1 Wins: <span id="player1Wins">0</span></p>
-    <p>Player 2 Wins: <span id="player2Wins">0</span></p>
+    <p>Wins: <span id="wins">0</span></p>
+    <p>Losses: <span id="losses">0</span></p>
     <p>Time: <span id="time">00:00</span></p>
   </div>
 
@@ -165,16 +146,9 @@
   <div class="modal" id="customModal">
     <div class="modal-content">
       <p id="modalMessage"></p>
-      <input type="text" id="modalInputName1" placeholder="Player 1 Name">
-      <input type="number" id="modalInputAge1" placeholder="Player 1 Age">
-      <select id="modalInputGender1">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
-      <input type="text" id="modalInputName2" placeholder="Player 2 Name" style="display: none;">
-      <input type="number" id="modalInputAge2" placeholder="Player 2 Age" style="display: none;">
-      <select id="modalInputGender2" style="display: none;">
+      <input type="text" id="modalInputName" placeholder="Enter your name">
+      <input type="number" id="modalInputAge" placeholder="Enter your age">
+      <select id="modalInputGender">
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option value="other">Other</option>
