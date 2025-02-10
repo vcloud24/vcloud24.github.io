@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - VCLOUD24</title>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="login-form">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account? <a href="create-account.html">Create one here</a>.</p>
+
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCWd8eowMTSwfcjvZv8yqVrPYQVtn0SkeM",
+      authDomain: "vcloud24-f47a3.firebaseapp.com",
+      projectId: "vcloud24-f47a3",
+      storageBucket: "vcloud24-f47a3.appspot.com",
+      messagingSenderId: "662896035334",
+      appId: "1:662896035334:web:a7c889bccc894e36e82587" // Add your app ID here
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Login
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          const encryptedUsername = btoa(user.email); // Encrypt email using Base64
+          window.location.href = `https://vcloud24.github.io?id=${encryptedUsername}`; // Redirect with encrypted username
+        })
+        .catch((error) => {
+          alert('Error: ' + error.message);
+        });
+    });
+  </script>
+</body>
+</html>
