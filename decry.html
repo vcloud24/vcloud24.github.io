@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decrypt Message</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    input[type="password"] {
+      padding: 10px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #333;
+      color: #fff;
+    }
+    button:hover {
+      background-color: #444;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Decrypt Message</h1>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button onclick="decryptMessage()">Decrypt</button>
+    <div id="message" class="message"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script>
+    // Encrypted passwords (replace these with your own encrypted passwords)
+    const encryptedPasswords = [
+      "U2FsdGVkX1+3QJ4Z7X6X8X9X1X2X3X4X5X6X7X8X9X0=", // Password 1
+      "U2FsdGVkX1+4QJ4Z7X6X8X9X1X2X3X4X5X6X7X8X9X0=", // Password 2
+      "U2FsdGVkX1+5QJ4Z7X6X8X9X1X2X3X4X5X6X7X8X9X0=", // Password 3
+      "U2FsdGVkX1+6QJ4Z7X6X8X9X1X2X3X4X5X6X7X8X9X0=", // Password 4
+      "U2FsdGVkX1+7QJ4Z7X6X8X9X1X2X3X4X5X6X7X8X9X0="  // Password 5
+    ];
+
+    // Secret key for decryption (must match the key used for encryption)
+    const secretKey = "secret-key";
+
+    // Function to decrypt a message
+    function decryptMessage() {
+      const passwordInput = document.getElementById('passwordInput').value.trim();
+      const messageDiv = document.getElementById('message');
+
+      // Check if the entered password is valid
+      let isValidPassword = false;
+      for (const encryptedPassword of encryptedPasswords) {
+        const decryptedPassword = CryptoJS.AES.decrypt(encryptedPassword, secretKey).toString(CryptoJS.enc.Utf8);
+        if (passwordInput === decryptedPassword) {
+          isValidPassword = true;
+          break;
+        }
+      }
+
+      if (!isValidPassword) {
+        messageDiv.textContent = "Invalid password! Access denied.";
+        return;
+      }
+
+      // Extract the encrypted message from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const encryptedMessage = urlParams.get('info');
+
+      if (!encryptedMessage) {
+        messageDiv.textContent = "No encrypted message found in the URL.";
+        return;
+      }
+
+      // Decrypt the message
+      try {
+        const decryptedMessage = CryptoJS.AES.decrypt(encryptedMessage, secretKey).toString(CryptoJS.enc.Utf8);
+        messageDiv.textContent = `Decrypted Message: ${decryptedMessage}`;
+      } catch (error) {
+        messageDiv.textContent = "Failed to decrypt the message. Invalid or corrupted data.";
+      }
+    }
+  </script>
+</body>
+</html>
