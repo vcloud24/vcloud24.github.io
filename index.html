@@ -29,6 +29,16 @@
     .logo {
       width: 150px;
       margin: 20px auto;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      }
+      to {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+      }
     }
     .ad {
       margin: 20px auto;
@@ -130,13 +140,19 @@
   </div>
 
   <!-- Ad Space -->
-  <div class="ad">Ad Space</div>
+  <div class="ad">NO ADS FOR NOW FREE PREMIUM </div>
 
   <!-- Custom Modal -->
   <div class="modal" id="customModal">
     <div class="modal-content">
       <p id="modalMessage"></p>
-      <input type="text" id="modalInput" placeholder="Enter your name">
+      <input type="text" id="modalInputName" placeholder="Enter your name">
+      <input type="number" id="modalInputAge" placeholder="Enter your age">
+      <select id="modalInputGender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
       <button id="modalButton">Start Game</button>
     </div>
   </div>
