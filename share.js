@@ -35,7 +35,7 @@ modalButton.addEventListener('click', () => {
 
 // Copy Shareable Link
 document.getElementById('copyLinkButton').addEventListener('click', () => {
-  const shareableLink = `https://vcloud24.github.io/friend?info=${encodeURIComponent(encryptedData)}`;
+  const shareableLink = window.location.href; // Current URL
   navigator.clipboard.writeText(shareableLink).then(() => {
     showModal('Link copied to clipboard!');
   });
