@@ -6,7 +6,9 @@ const timeDisplay = document.getElementById('time');
 const bootScreen = document.getElementById('bootScreen');
 const customModal = document.getElementById('customModal');
 const modalMessage = document.getElementById('modalMessage');
-const modalInput = document.getElementById('modalInput');
+const modalInputName = document.getElementById('modalInputName');
+const modalInputAge = document.getElementById('modalInputAge');
+const modalInputGender = document.getElementById('modalInputGender');
 const modalButton = document.getElementById('modalButton');
 
 let wins = 0;
@@ -15,16 +17,22 @@ let time = 0;
 let playerTurn = true;
 let boardState = ['', '', '', '', '', '', '', '', ''];
 let playerName = '';
+let playerAge = '';
+let playerGender = '';
 
 // Show custom modal
 function showModal(message, callback) {
   modalMessage.textContent = message;
-  modalInput.style.display = 'block';
+  modalInputName.style.display = 'block';
+  modalInputAge.style.display = 'block';
+  modalInputGender.style.display = 'block';
   modalButton.onclick = () => {
-    const inputValue = modalInput.value.trim();
-    if (inputValue) {
+    const nameValue = modalInputName.value.trim();
+    const ageValue = modalInputAge.value.trim();
+    const genderValue = modalInputGender.value.trim();
+    if (nameValue && ageValue && genderValue) {
       customModal.style.display = 'none';
-      callback(inputValue);
+      callback(nameValue, ageValue, genderValue);
     }
   };
   customModal.style.display = 'block';
@@ -33,8 +41,10 @@ function showModal(message, callback) {
 // Boot-up screen
 setTimeout(() => {
   bootScreen.style.display = 'none';
-  showModal('Enter your name to start the game:', (name) => {
+  showModal('Enter your details to start the game:', (name, age, gender) => {
     playerName = name;
+    playerAge = age;
+    playerGender = gender;
     customModal.style.display = 'none';
   });
 }, 2000); // Simulate 2-second boot-up
@@ -185,6 +195,8 @@ function resetGame() {
     const timeDate = now.toLocaleString();
     const data = JSON.stringify({
       name: playerName,
+      age: playerAge,
+      gender: playerGender,
       wins,
       losses,
       time,
