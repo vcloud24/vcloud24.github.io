@@ -10,6 +10,7 @@ const timerDisplay = document.getElementById('timer');
 const resultsText = document.getElementById('resultsText');
 const playAgainButton = document.getElementById('playAgain');
 const shareScoreButton = document.getElementById('shareScore');
+const premiumGamesButton = document.getElementById('premiumGames');
 
 // Game Variables
 let playerScore = 0;
@@ -200,8 +201,25 @@ playAgainButton.addEventListener('click', () => {
   startTimer();
 });
 
-// Share Score
+// Share Encrypted Score
 shareScoreButton.addEventListener('click', () => {
-  const shareText = `I scored ${playerScore} points in VGames Tic Tac Toe! Play now at vcloud24.github.io`;
-  alert(`Share this text: ${shareText}`);
+  const scoreData = {
+    player: localStorage.getItem('username'),
+    score: playerScore,
+    time: timerDisplay.textContent,
+    date: new Date().toLocaleString()
+  };
+  const encryptedScore = CryptoJS.AES.encrypt(JSON.stringify(scoreData), 'vgames-secret-key').toString();
+  const shareLink = `https://vcloud24.github.io/score=id?${encodeURIComponent(encryptedScore)}`;
+  alert(`Share this link: ${shareLink}`);
+});
+
+// Premium Games Link
+premiumGamesButton.addEventListener('click', () => {
+  const premiumData = {
+    user: localStorage.getItem('username'),
+    date: new Date().toLocaleString()
+  };
+  const encryptedPremium = CryptoJS.AES.encrypt(JSON.stringify(premiumData), 'vgames-secret-key').toString();
+  window.location.href = `https://vcloud24.github.io/prem?enc=${encodeURIComponent(encryptedPremium)}`;
 });
