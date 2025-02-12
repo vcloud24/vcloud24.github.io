@@ -3,161 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unbeatable Tic Tac Toe - Hardcore Mode</title>
-  <style>
-    body {
-      background-color: #1a1a1a;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-    .boot-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #1a1a1a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      z-index: 1000;
-    }
-    .logo {
-      width: 150px;
-      margin: 20px auto;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-      animation: glow 2s infinite alternate;
-    }
-    @keyframes glow {
-      from {
-        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-      }
-      to {
-        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
-      }
-    }
-    .ad {
-      margin: 20px auto;
-      width: 300px;
-      height: 100px;
-      background-color: #333;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .board {
-      display: grid;
-      grid-template-columns: repeat(3, 100px);
-      grid-gap: 5px;
-      margin: 20px auto;
-      justify-content: center;
-    }
-    .cell {
-      width: 100px;
-      height: 100px;
-      background-color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    .cell:hover {
-      background-color: #444;
-    }
-    .scoreboard {
-      margin: 20px auto;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #333;
-      padding: 20px;
-      border-radius: 8px;
-      z-index: 1001;
-    }
-    .modal-content {
-      text-align: center;
-    }
-    .modal input {
-      margin: 10px 0;
-      padding: 10px;
-      width: 80%;
-      border: none;
-      border-radius: 5px;
-    }
-    .modal button {
-      margin: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+  <title>VGames - Tic Tac Toe</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <!-- Boot-Up Screen -->
-  <div class="boot-screen" id="bootScreen">
-    Prepping Hardcore Mode... Please wait.
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="screen">
+    <img src="assets/logo.png" alt="VGames Logo" class="logo">
+    <h1>VGames</h1>
+    <p>Loading...</p>
   </div>
 
-  <!-- Logo Embed -->
-  <div class="logo">
-    <div style="position: relative; width: 100%; height: 0; padding-top: 100.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;">
-      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAGeli_tzpA/Rl41muKHBPWhrNYszSuhyw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-    </div>
+  <!-- Login Section -->
+  <div id="loginScreen" class="screen hidden">
+    <img src="assets/logo.png" alt="VGames Logo" class="logo">
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <button id="guestLogin">Login as Guest</button>
+    <p>Don't have an account? <a href="https://vcloud24.github.io/account" target="_blank">Create one</a></p>
+    <p>Having trouble? <a href="https://vcloud24.github.io/trouble" target="_blank">Get help</a></p>
   </div>
 
-  <!-- Ad Space -->
-  <div class="ad">NO ADS</div>
-
-  <!-- Game Board -->
-  <div class="board" id="board">
-    <div class="cell" data-index="0"></div>
-    <div class="cell" data-index="1"></div>
-    <div class="cell" data-index="2"></div>
-    <div class="cell" data-index="3"></div>
-    <div class="cell" data-index="4"></div>
-    <div class="cell" data-index="5"></div>
-    <div class="cell" data-index="6"></div>
-    <div class="cell" data-index="7"></div>
-    <div class="cell" data-index="8"></div>
+  <!-- Game Section -->
+  <div id="gameScreen" class="screen hidden">
+    <header>
+      <img src="assets/logo.png" alt="VGames Logo" class="logo">
+      <span id="usernameDisplay"></span>
+    </header>
+    <main>
+      <div class="game-container">
+        <div class="board">
+          <!-- Tic Tac Toe Board (3x3 grid) -->
+          <div class="cell" data-index="0"></div>
+          <div class="cell" data-index="1"></div>
+          <div class="cell" data-index="2"></div>
+          <div class="cell" data-index="3"></div>
+          <div class="cell" data-index="4"></div>
+          <div class="cell" data-index="5"></div>
+          <div class="cell" data-index="6"></div>
+          <div class="cell" data-index="7"></div>
+          <div class="cell" data-index="8"></div>
+        </div>
+        <div class="scoreboard">
+          <h2>Scoreboard</h2>
+          <p>Player: <span id="playerScore">0</span></p>
+          <p>Bot: <span id="botScore">0</span></p>
+          <p>Time: <span id="timer">00:00</span></p>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <!-- Scoreboard -->
-  <div class="scoreboard">
-    <p>Wins: <span id="wins">0</span></p>
-    <p>Losses: <span id="losses">0</span></p>
-    <p>Time: <span id="time">00:00</span></p>
+  <!-- Results Section -->
+  <div id="resultsScreen" class="screen hidden">
+    <img src="assets/logo.png" alt="VGames Logo" class="logo">
+    <h1>Game Over</h1>
+    <p id="resultsText"></p>
+    <button id="playAgain">Play Again</button>
+    <button id="shareScore">Share Score</button>
   </div>
 
-  <!-- Ad Space -->
-  <div class="ad">NO ADS</div>
-
-  <!-- Custom Modal -->
-  <div class="modal" id="customModal">
-    <div class="modal-content">
-      <p id="modalMessage"></p>
-      <input type="text" id="modalInputName" placeholder="Enter your name">
-      <input type="number" id="modalInputAge" placeholder="Enter your age">
-      <select id="modalInputGender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
-      <button id="modalButton">Start Game</button>
-    </div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="script.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>
