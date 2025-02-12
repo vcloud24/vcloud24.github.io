@@ -1,0 +1,118 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #1a1a1a;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.screen {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+/* Loading Screen */
+#loadingScreen h1 {
+  font-size: 3rem;
+  margin: 10px 0;
+}
+
+/* Login Screen */
+#loginScreen input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  max-width: 300px;
+  border: 2px solid #444;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+}
+
+#loginScreen button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff5722;
+  color: #fff;
+  cursor: pointer;
+}
+
+#loginScreen button:hover {
+  background-color: #e64a19;
+}
+
+/* Game Screen */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #222;
+}
+
+#usernameDisplay {
+  font-size: 1.2rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+  margin: 20px auto;
+}
+
+.cell {
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  border: 2px solid #444;
+}
+
+.cell:hover {
+  background-color: #444;
+}
+
+.scoreboard {
+  margin-top: 20px;
+}
+
+/* Results Screen */
+#resultsScreen h1 {
+  font-size: 2.5rem;
+  margin: 10px 0;
+}
+
+#resultsScreen button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff5722;
+  color: #fff;
+  cursor: pointer;
+}
+
+#resultsScreen button:hover {
+  background-color: #e64a19;
+}
