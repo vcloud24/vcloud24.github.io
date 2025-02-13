@@ -1,118 +1,66 @@
-/* General Styles */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #1a1a1a;
   color: #fff;
+  text-align: center;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
 }
 
-.screen {
-  text-align: center;
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .hidden {
   display: none;
 }
 
-.logo {
-  width: 150px;
-  margin-bottom: 20px;
-}
-
-/* Loading Screen */
-#loadingScreen h1 {
-  font-size: 3rem;
-  margin: 10px 0;
-}
-
-/* Login Screen */
-#loginScreen input {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
-  width: 80%;
-  max-width: 300px;
-  border: 2px solid #444;
-  border-radius: 5px;
-  background-color: #333;
+button {
+  background-color: #ff4444;
   color: #fff;
-}
-
-#loginScreen button {
+  border: none;
   padding: 10px 20px;
   margin: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #ff5722;
-  color: #fff;
   cursor: pointer;
+  font-size: 16px;
 }
 
-#loginScreen button:hover {
-  background-color: #e64a19;
-}
-
-/* Game Screen */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #222;
-}
-
-#usernameDisplay {
-  font-size: 1.2rem;
+button:hover {
+  background-color: #cc0000;
 }
 
 .board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
   gap: 5px;
-  margin: 20px auto;
 }
 
 .cell {
+  width: 100px;
+  height: 100px;
   background-color: #333;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  justify-content: center;
+  font-size: 24px;
   cursor: pointer;
-  border: 2px solid #444;
 }
 
 .cell:hover {
   background-color: #444;
 }
 
-.scoreboard {
-  margin-top: 20px;
-}
-
-/* Results Screen */
-#resultsScreen h1 {
-  font-size: 2.5rem;
-  margin: 10px 0;
-}
-
-#resultsScreen button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #ff5722;
-  color: #fff;
-  cursor: pointer;
-}
-
-#resultsScreen button:hover {
-  background-color: #e64a19;
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #222;
+  padding: 20px;
+  border: 2px solid #ff4444;
+  z-index: 1000;
 }
