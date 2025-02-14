@@ -1,15 +1,49 @@
-// Encrypted accounts (for demonstration purposes)
-const accounts = [
-  { username: "user1", password: "5f4dcc3b5aa765d61d8327deb882cf99", code: "7349" }, 
-  { username: "user2", password: "482c811da5d5b4bc6d497ffa98491e38", code: "7349" }, 
-];
+// Encrypted accounts (username: encryptedPassword)
+const accounts = {
+    "vuy25@vc.git": "U2FsdGVkX19zZWNyZXRfa2V5X2hlcmU=imunavailable", // Encrypted password for [imunavailable]
+    "phili123@vc.git": "U2FsdGVkX19zZWNyZXRfa2V5X2hlcmU=iamtheghost", // Encrypted password for [iamtheghost]
+    "jimmy2@vc.git": "U2FsdGVkX19zZWNyZXRfa2V5X2hlcmU=stronger1010" // Encrypted password for [stronger1010]
+};
 
-function encrypt(input) {
-  // Simple MD5 hash for demonstration (use a secure hashing algorithm in production)
-  return CryptoJS.MD5(input).toString();
+// Encryption functions
+function encrypt(data) {
+    return CryptoJS.AES.encrypt(data, "hardcore-key").toString();
 }
 
-function validateLogin(username, password) {
-  const encryptedPassword = encrypt(password);
-  return accounts.find(acc => acc.username === username && acc.password === encryptedPassword);
+function decrypt(data) {
+    const bytes = CryptoJS.AES.decrypt(data, "hardcore-key");
+    return bytes.toString(CryptoJS.enc.Utf8);
+}
+
+// Login logic
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (accounts[username] && decrypt(accounts[username]) === password) {
+        const code = prompt("Enter five-digit code:");
+        if (code === "7349") {
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("gamePage").style.display = "block";
+        } else if (code === "9898") {
+            alert("Resetting web...");
+            window.location.reload();
+        } else {
+            alert("Invalid code. Try again.");
+        }
+    } else {
+        alert("Invalid username or password.");
+    }
+});
+
+// Guest mode
+function guestMode() {
+    const code = prompt("Enter guest code:");
+    if (code === "0000") {
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("gamePage").style.display = "block";
+    } else {
+        alert("Invalid code. Try again.");
+    }
 }
