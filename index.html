@@ -4,11 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VCLOUD24 - Hardcore Tic Tac Toe</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Hardcore Theme Styles */
+        body {
+            font-family: 'Arial Black', sans-serif;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+
+        h1, h2 {
+            font-family: 'Impact', sans-serif;
+            color: #ff0000;
+            text-shadow: 2px 2px 5px #ff0000;
+        }
+
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid #ff0000;
+            background: #222;
+            color: #fff;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #ff0000;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-family: 'Impact', sans-serif;
+            font-size: 18px;
+            text-transform: uppercase;
+            box-shadow: 2px 2px 5px #ff0000;
+        }
+
+        button:hover {
+            background: #cc0000;
+        }
+
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            margin: 20px auto;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ff0000;
+            font-family: 'Impact', sans-serif;
+            text-shadow: 2px 2px 5px #ff0000;
+        }
+
+        .cell:hover {
+            background: #333;
+        }
+
+        #scoreBoard {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ff0000;
+            text-shadow: 2px 2px 5px #ff0000;
+        }
+
+        #logo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+        }
+
+        /* Custom Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000;
+            border: 2px solid #ff0000;
+            padding: 20px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal p {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .modal button {
+            margin-top: 10px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <!-- Login Page -->
-    <div id="loginPage">
+    <div id="loginPage" class="page active">
         <h1>VCLOUD24</h1>
         <h2>vgames</h2>
         <form id="loginForm">
@@ -16,11 +152,19 @@
             <input type="password" id="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
-        <button onclick="guestMode()">Guest Mode</button>
+        <button onclick="showCodePage('guest')">Guest Mode</button>
+    </div>
+
+    <!-- Code Entry Page -->
+    <div id="codePage" class="page">
+        <h1>Enter Code</h1>
+        <input type="text" id="codeInput" placeholder="Enter 5-digit code" maxlength="5">
+        <button onclick="submitCode()">Submit</button>
+        <p id="codeError" style="color: #ff0000; display: none;">Invalid code. Try again.</p>
     </div>
 
     <!-- Game Page -->
-    <div id="gamePage" style="display: none;">
+    <div id="gamePage" class="page">
         <h1>VCLOUD</h1>
         <button onclick="startGame()">Play</button>
         <div id="gameBoard">
@@ -40,12 +184,168 @@
         </div>
     </div>
 
+    <!-- Custom Modal for Messages -->
+    <div id="messageModal" class="modal">
+        <p id="modalMessage"></p>
+        <button onclick="hideModal()">Close</button>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
     <!-- Embedded Logo -->
     <img src="https://www.canva.com/design/DAGeli_tzpA/Rl41muKHBPWhrNYszSuhyw/watch" alt="VCLOUD24 Logo" id="logo">
 
     <!-- Include CryptoJS for encryption -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="accounts.js"></script>
-    <script src="game.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Encrypted accounts (username: encryptedPassword)
+        const accounts = {
+            "vuy25@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0", // Encrypted password for [imunavailable]
+            "phili123@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0", // Encrypted password for [iamtheghost]
+            "jimmy2@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0" // Encrypted password for [stronger1010]
+        };
+
+        // Encryption functions
+        function encrypt(data) {
+            return CryptoJS.AES.encrypt(data, "hardcore-key").toString();
+        }
+
+        function decrypt(data) {
+            const bytes = CryptoJS.AES.decrypt(data, "hardcore-key");
+            return bytes.toString(CryptoJS.enc.Utf8);
+        }
+
+        // Show code page
+        let currentMode = ""; // "account" or "guest"
+        function showCodePage(mode) {
+            currentMode = mode;
+            document.getElementById("loginPage").classList.remove("active");
+            document.getElementById("codePage").classList.add("active");
+        }
+
+        // Submit code
+        function submitCode() {
+            const code = document.getElementById("codeInput").value;
+            if (currentMode === "account" && code === "7349") {
+                document.getElementById("codePage").classList.remove("active");
+                document.getElementById("gamePage").classList.add("active");
+            } else if (currentMode === "guest" && code === "0000") {
+                document.getElementById("codePage").classList.remove("active");
+                document.getElementById("gamePage").classList.add("active");
+            } else if (code === "9898") {
+                showModal("Resetting web...");
+                setTimeout(() => window.location.reload(), 2000);
+            } else {
+                document.getElementById("codeError").style.display = "block";
+            }
+        }
+
+        // Login logic
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (accounts[username] && decrypt(accounts[username]) === password) {
+                showCodePage("account");
+            } else {
+                showModal("Invalid username or password.");
+            }
+        });
+
+        // Game logic
+        let board = ["", "", "", "", "", "", "", "", ""];
+        let currentPlayer = "X";
+        let gameActive = false;
+        let time = 0;
+        let score = 0;
+        let timerInterval;
+
+        // Start game
+        function startGame() {
+            gameActive = true;
+            document.getElementById("gameBoard").style.display = "grid";
+            resetBoard();
+            startTimer();
+        }
+
+        // Reset board
+        function resetBoard() {
+            board = ["", "", "", "", "", "", "", "", ""];
+            currentPlayer = "X";
+            renderBoard();
+        }
+
+        // Render board
+        function renderBoard() {
+            const cells = document.querySelectorAll(".cell");
+            cells.forEach((cell, index) => {
+                cell.textContent = board[index];
+            });
+        }
+
+        // Player move
+        function makeMove(index) {
+            if (board[index] === "" && gameActive) {
+                board[index] = currentPlayer;
+                renderBoard();
+                checkWin();
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+            }
+        }
+
+        // Check for winner
+        function checkWin() {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6] // Diagonals
+            ];
+            for (let combo of winningCombinations) {
+                const [a, b, c] = combo;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    gameActive = false;
+                    showModal(`Player ${board[a]} wins!`);
+                    return;
+                }
+            }
+            if (!board.includes("")) {
+                gameActive = false;
+                showModal("It's a draw!");
+            }
+        }
+
+        // Timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                time++;
+                document.getElementById("time").textContent = formatTime(time);
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+        }
+
+        // Custom Modal Functions
+        function showModal(message) {
+            document.getElementById("modalMessage").textContent = message;
+            document.getElementById("messageModal").classList.add("active");
+            document.getElementById("overlay").classList.add("active");
+        }
+
+        function hideModal() {
+            document.getElementById("messageModal").classList.remove("active");
+            document.getElementById("overlay").classList.remove("active");
+        }
+
+        // Event listeners
+        document.querySelectorAll(".cell").forEach(cell => {
+            cell.addEventListener("click", () => makeMove(parseInt(cell.getAttribute("data-index"))));
+        });
+    </script>
 </body>
 </html>
