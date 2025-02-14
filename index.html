@@ -1,71 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VCLOUD24 - VGAMES</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCLOUD24 - Hardcore Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Landing Page -->
-  <div id="landingPage" class="page">
-    <h1>VCLOUD24</h1>
-    <p>VGAMES</p>
-    <button id="enterButton">Enter</button>
-  </div>
-
-  <!-- Login Page -->
-  <div id="loginPage" class="page hidden">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <input type="text" id="username" placeholder="Username" required>
-      <input type="password" id="password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
-    <button id="guestMode">Guest Mode</button>
-    <p id="errorMessage"></p>
-  </div>
-
-  <!-- Game Page -->
-  <div id="gamePage" class="page hidden">
-    <h2>VCLOUD</h2>
-    <button id="playButton">Play</button>
-    <div id="gameBoard" class="hidden">
-      <div class="scoreboard">
-        <p>Time: <span id="time">00:00</span></p>
-        <p>Score: <span id="score">0</span></p>
-      </div>
-      <div class="board">
-        <!-- Tic Tac Toe Grid -->
-        <div class="row">
-          <div class="cell" data-index="0"></div>
-          <div class="cell" data-index="1"></div>
-          <div class="cell" data-index="2"></div>
-        </div>
-        <div class="row">
-          <div class="cell" data-index="3"></div>
-          <div class="cell" data-index="4"></div>
-          <div class="cell" data-index="5"></div>
-        </div>
-        <div class="row">
-          <div class="cell" data-index="6"></div>
-          <div class="cell" data-index="7"></div>
-          <div class="cell" data-index="8"></div>
-        </div>
-      </div>
+    <!-- Login Page -->
+    <div id="loginPage">
+        <h1>VCLOUD24</h1>
+        <h2>vgames</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <button onclick="guestMode()">Guest Mode</button>
     </div>
-  </div>
 
-  <!-- Ad Popup -->
-  <div id="adPopup" class="popup hidden">
-    <p>Play VCLOUD24, VGAMES1, and VUYANI1 at:</p>
-    <p><a href="https://vcloud24.github.io">vcloud24.github.io</a></p>
-    <button id="closeAd">Close</button>
-  </div>
+    <!-- Game Page -->
+    <div id="gamePage" style="display: none;">
+        <h1>VCLOUD</h1>
+        <button onclick="startGame()">Play</button>
+        <div id="gameBoard">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <div id="scoreBoard">
+            <p>Time: <span id="time">00:00</span></p>
+            <p>Score: <span id="score">0</span></p>
+        </div>
+    </div>
 
-  <script src="accounts.js"></script>
-  <script src="main.js"></script>
-  <script src="game.js"></script>
-  <script src="ads.js"></script>
+    <!-- Embedded Logo -->
+    <img src="https://www.canva.com/design/DAGeli_tzpA/Rl41muKHBPWhrNYszSuhyw/watch" alt="VCLOUD24 Logo" id="logo">
+
+    <script src="accounts.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
