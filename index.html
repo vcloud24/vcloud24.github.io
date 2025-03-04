@@ -349,3 +349,57 @@
     </script>
 </body>
 </html>
+<!-- Widget Container -->
+<div id="policyWidget" style="position: fixed; bottom: 20px; right: 20px; background: rgba(255, 255, 255, 0.9); padding: 10px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); z-index: 1000;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+    <span style="font-size: 14px; color: #333;">Policies</span>
+    <button onclick="hideWidget()" style="background: #007bff; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">X</button>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 4px;">
+    <a href="#" onclick="openPopup('tc')" style="color: #007bff; text-decoration: none; font-size: 12px;">Terms</a>
+    <a href="#" onclick="openPopup('pp')" style="color: #007bff; text-decoration: none; font-size: 12px;">Privacy</a>
+    <a href="#" onclick="openPopup('cookiep')" style="color: #007bff; text-decoration: none; font-size: 12px;">Cookies</a>
+  </div>
+</div>
+
+<!-- Pop-Up Windows -->
+<div id="tcPopup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 10px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); z-index: 1001; width: 80%; max-width: 500px; max-height: 80vh; overflow-y: auto; display: none;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+    <h3 style="margin: 0; font-size: 16px; color: #333;">Terms and Conditions</h3>
+    <button onclick="closePopup('tcPopup')" style="background: #ff4d4d; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">X</button>
+  </div>
+  <iframe src="https://vcloud24.github.io/tc" width="100%" height="300" style="border: none;"></iframe>
+</div>
+
+<div id="ppPopup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 10px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); z-index: 1001; width: 80%; max-width: 500px; max-height: 80vh; overflow-y: auto; display: none;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+    <h3 style="margin: 0; font-size: 16px; color: #333;">Privacy Policy</h3>
+    <button onclick="closePopup('ppPopup')" style="background: #ff4d4d; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">X</button>
+  </div>
+  <iframe src="https://vcloud24.github.io/pp" width="100%" height="300" style="border: none;"></iframe>
+</div>
+
+<div id="cookiepPopup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 10px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); z-index: 1001; width: 80%; max-width: 500px; max-height: 80vh; overflow-y: auto; display: none;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+    <h3 style="margin: 0; font-size: 16px; color: #333;">Cookies Policy</h3>
+    <button onclick="closePopup('cookiepPopup')" style="background: #ff4d4d; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">X</button>
+  </div>
+  <iframe src="https://vcloud24.github.io/cookiep" width="100%" height="300" style="border: none;"></iframe>
+</div>
+
+<script>
+  // Open pop-up window
+  function openPopup(policy) {
+    document.getElementById(`${policy}Popup`).style.display = 'block';
+  }
+
+  // Close pop-up window
+  function closePopup(policy) {
+    document.getElementById(policy).style.display = 'none';
+  }
+
+  // Hide widget
+  function hideWidget() {
+    document.getElementById('policyWidget').style.display = 'none';
+  }
+</script>
