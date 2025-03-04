@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms and Conditions - VGames</title>
+  <link rel="icon" href="https://vcloud24.github.io/vcloud24.png" type="image/png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      margin: 0;
+      padding: 1rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .logo-container img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .language-selector {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    .language-selector select {
+      padding: 0.5rem;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .policy-content {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="https://vgames1.github.io/vgamesblack.png" alt="VGames Logo">
+      <img src="https://vcloud24.github.io/vcloud24.png" alt="VCloud24 Logo">
+    </div>
+    <div class="language-selector">
+      <select id="languageSelector" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="af">Afrikaans</option>
+        <option value="zu">Zulu</option>
+      </select>
+    </div>
+    <h1 id="policyTitle">Terms and Conditions</h1>
+    <div class="policy-content" id="policyContent">
+      <!-- English Content -->
+      <div id="en">
+        <p><strong>1. Introduction</strong></p>
+        <p>By using our services, you agree to these terms and conditions. If you do not agree, do not use our services.</p>
+        <p><strong>2. Compliance with Laws</strong></p>
+        <p>We comply with the laws of the United States (US) and South Africa (SA). Users must also adhere to these laws.</p>
+        <p><strong>3. Account Suspension</strong></p>
+        <p>We reserve the right to suspend or ban accounts for violations, including cheating, fraud, or illegal activities.</p>
+        <p><strong>4. Intellectual Property</strong></p>
+        <p>All content on this website is protected by copyright. Unauthorized use is prohibited.</p>
+        <p><strong>5. Liability</strong></p>
+        <p>We are not liable for any damages or losses resulting from the use of our services.</p>
+        <p><strong>6. Changes to Terms</strong></p>
+        <p>We may update these terms at any time. Continued use of our services constitutes acceptance of the changes.</p>
+      </div>
+
+      <!-- French Content -->
+      <div id="fr" style="display: none;">
+        <p><strong>1. Introduction</strong></p>
+        <p>En utilisant nos services, vous acceptez ces termes et conditions. Si vous n'êtes pas d'accord, n'utilisez pas nos services.</p>
+        <p><strong>2. Conformité aux lois</strong></p>
+        <p>Nous respectons les lois des États-Unis (US) et de l'Afrique du Sud (SA). Les utilisateurs doivent également respecter ces lois.</p>
+        <p><strong>3. Suspension de compte</strong></p>
+        <p>Nous nous réservons le droit de suspendre ou de bannir des comptes pour des violations, y compris la triche, la fraude ou des activités illégales.</p>
+        <p><strong>4. Propriété intellectuelle</strong></p>
+        <p>Tout le contenu de ce site web est protégé par le droit d'auteur. Toute utilisation non autorisée est interdite.</p>
+        <p><strong>5. Responsabilité</strong></p>
+        <p>Nous ne sommes pas responsables des dommages ou pertes résultant de l'utilisation de nos services.</p>
+        <p><strong>6. Modifications des termes</strong></p>
+        <p>Nous pouvons mettre à jour ces termes à tout moment. L'utilisation continue de nos services constitue l'acceptation des modifications.</p>
+      </div>
+
+      <!-- Afrikaans Content -->
+      <div id="af" style="display: none;">
+        <p><strong>1. Inleiding</strong></p>
+        <p>Deur ons dienste te gebruik, aanvaar jy hierdie bepalings en voorwaardes. As jy nie saamstem nie, moenie ons dienste gebruik nie.</p>
+        <p><strong>2. Nakoming van wette</strong></p>
+        <p>Ons voldoen aan die wette van die Verenigde State (VS) en Suid-Afrika (SA). Gebruikers moet ook hierdie wette nakom.</p>
+        <p><strong>3. Rekeningopskorting</strong></p>
+        <p>Ons behou ons die reg voor om rekeninge op te skort of te verban vir oortredings, insluitend kul, bedrog of onwettige aktiwiteite.</p>
+        <p><strong>4. Intellektuele eiendom</strong></p>
+        <p>Alle inhoud op hierdie webwerf word deur kopiereg beskerm. Ongeoorloofde gebruik is verbode.</p>
+        <p><strong>5. Aanspreeklikheid</strong></p>
+        <p>Ons is nie aanspreeklik vir enige skade of verliese as gevolg van die gebruik van ons dienste nie.</p>
+        <p><strong>6. Veranderinge aan bepalings</strong></p>
+        <p>Ons kan hierdie bepalings op enige tyd opdateer. Voortgesette gebruik van ons dienste dui op aanvaarding van die veranderinge.</p>
+      </div>
+
+      <!-- Zulu Content -->
+      <div id="zu" style="display: none;">
+        <p><strong>1. Isingeniso</strong></p>
+        <p>Ngokusebenzisa izinsiza zethu, uyavuma le mithetho nemibandela. Uma ungavumelani, ungasebenzisi izinsiza zethu.</p>
+        <p><strong>2. Ukuthobela Imithetho</strong></p>
+        <p>Sithobela imithetho yase-United States (US) naseNingizimu Afrika (SA). Abasebenzisi kufanele bahloniphe le mithetho.</p>
+        <p><strong>3. Ukumiswa Kwe-akhawunti</strong></p>
+        <p>Singakwazi ukumisa noma ukuvala ama-akhawunti ngokwephula imithetho, okuhlanganisa ukukhohlisa, ukukhwabanisa noma izenzo ezingekho emthethweni.</p>
+        <p><strong>4. Amalungelo Obunikazi</strong></p>
+        <p>Yonke imininingwane kule webhusayithi ivikelwe ngumthetho wokukopisha. Ukusetshenziswa ngokungemthetho kuyenqatshelwe.</p>
+        <p><strong>5. Ukubhekana Nokulimala</strong></p>
+        <p>Asikho sivikeli nganoma yikuphi ukulimala noma ukulahlekelwa okubangelwa ukusebenzisa izinsiza zethu.</p>
+        <p><strong>6. Izinguquko Kumibandela</strong></p>
+        <p>Singakwazi ukubuyekeza le mithetho nanoma nini. Ukuqhubeka nokusebenzisa izinsiza zethu kusho ukwamukela izinguquko.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Change language based on user selection
+    function changeLanguage() {
+      const selector = document.getElementById('languageSelector');
+      const selectedLanguage = selector.value;
+      const languages = ['en', 'fr', 'af', 'zu'];
+
+      // Hide all language content
+      languages.forEach(lang => {
+        document.getElementById(lang).style.display = 'none';
+      });
+
+      // Show selected language content
+      document.getElementById(selectedLanguage).style.display = 'block';
+
+      // Update policy title
+      const titles = {
+        en: 'Terms and Conditions',
+        fr: 'Termes et Conditions',
+        af: 'Bepalings en Voorwaardes',
+        zu: 'Imigomo Nemibandela',
+      };
+      document.getElementById('policyTitle').textContent = titles[selectedLanguage];
+    }
+
+    // Set default language to English
+    changeLanguage();
+  </script>
+</body>
+</html>
