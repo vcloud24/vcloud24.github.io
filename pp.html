@@ -1,126 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | VGAMES</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #121212;
-            color: white;
-            padding: 20px;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 2px solid #444;
-        }
-        .logo {
-            height: 50px;
-        }
-        main {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
-        }
-        select {
-            padding: 5px;
-            border-radius: 5px;
-            background: #222;
-            color: white;
-        }
-        ul {
-            text-align: left;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - VGames</title>
+  <link rel="icon" href="https://vcloud24.github.io/vcloud24.png" type="image/png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      margin: 0;
+      padding: 1rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .logo-container img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .language-selector {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    .language-selector select {
+      padding: 0.5rem;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .policy-content {
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="https://vgames1.github.io/vgamesblack.png" alt="VGAMES Logo" class="logo">
-        <h1>Privacy Policy</h1>
-        <select id="languageSelector">
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="af">Afrikaans</option>
-            <option value="zu">Zulu</option>
-        </select>
-    </header>
-    
-    <main>
-        <section id="policyContent">
-            <div class="lang en">
-                <h2>Terms of Use</h2>
-                <p>By using our services, you agree to follow our policies. If you do not agree, do not use our services.</p>
-                <p>We are not liable for any harm, loss, or issues that may arise from using our website.</p>
-                <p>If found cheating, depending on the severity of the offense, your account and IP address may be suspended for 1 to 4 weeks or permanently banned.</p>
-                <h3>Legal Policies</h3>
-                <ul>
-                    <li>No copyright infringement.</li>
-                    <li>No unauthorized access or hacking attempts.</li>
-                    <li>No misuse of platform features.</li>
-                    <li>No harassment or abusive behavior.</li>
-                </ul>
-            </div>
-            <div class="lang fr" style="display: none;">
-                <h2>Conditions d'utilisation</h2>
-                <p>En utilisant nos services, vous acceptez de suivre nos politiques. Si vous n'êtes pas d'accord, n'utilisez pas nos services.</p>
-                <p>Nous ne sommes pas responsables de tout dommage, perte ou problème résultant de l'utilisation de notre site.</p>
-                <p>Si vous êtes pris en train de tricher, en fonction de la gravité de l'infraction, votre compte et votre adresse IP peuvent être suspendus pendant 1 à 4 semaines ou bannis définitivement.</p>
-                <h3>Politiques légales</h3>
-                <ul>
-                    <li>Aucune violation du droit d'auteur.</li>
-                    <li>Pas d'accès non autorisé ou de tentative de piratage.</li>
-                    <li>Aucune mauvaise utilisation des fonctionnalités de la plateforme.</li>
-                    <li>Aucun harcèlement ou comportement abusif.</li>
-                </ul>
-            </div>
-            <div class="lang af" style="display: none;">
-                <h2>Gebruiksvoorwaardes</h2>
-                <p>Deur ons dienste te gebruik, stem jy in om ons beleide te volg. Indien nie, moenie ons dienste gebruik nie.</p>
-                <p>Ons is nie aanspreeklik vir enige skade, verlies of probleme wat mag ontstaan deur die gebruik van ons webwerf nie.</p>
-                <p>As jy betrap word met oneerlike gedrag, afhangende van die erns van die oortreding, kan jou rekening en IP-adres vir 1 tot 4 weke geskors of permanent verban word.</p>
-                <h3>Wettige Beleide</h3>
-                <ul>
-                    <li>Geen kopieregskendings.</li>
-                    <li>Geen ongemagtigde toegang of kuberkraking nie.</li>
-                    <li>Geen misbruik van platformfunksies nie.</li>
-                    <li>Geen teistering of beledigende gedrag nie.</li>
-                </ul>
-            </div>
-            <div class="lang zu" style="display: none;">
-                <h2>Imigomo Yokusebenzisa</h2>
-                <p>Uma usebenzisa izinsiza zethu, uyavuma ukulandela imigomo yethu. Uma ungavumelani, ungasebenzisi izinsiza zethu.</p>
-                <p>Asinacala nganoma yimuphi umonakalo, ukulahleka, noma izinkinga ezingavela ekusebenziseni iwebhusayithi yethu.</p>
-                <p>Uma utholakale ukukhohlisa, kuye ngokuthi ubukhulu besono, i-akhawunti yakho kanye ne-IP ingamiselwa amasonto ayi-1 kuya kwayi-4 noma ivinjelwe unomphela.</p>
-                <h3>Imigomo Yomthetho</h3>
-                <ul>
-                    <li>Akukho ukuphula amalungelo obunikazi.</li>
-                    <li>Akukho ukufinyelela okungagunyaziwe noma ukuzama ukwephula ubumfihlo.</li>
-                    <li>Akukho ukusebenzisa kabi izici zepulatifomu.</li>
-                    <li>Akukho ukuhlukunyezwa noma ukuziphatha okungafanele.</li>
-                </ul>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <img src="https://vcloud24.github.io/vcloud24.png" alt="VCloud24 Logo" class="logo">
-    </footer>
-    
-    <script>
-        document.getElementById('languageSelector').addEventListener('change', function() {
-            let selectedLang = this.value;
-            document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
-            document.querySelector('.' + selectedLang).style.display = 'block';
-        });
-    </script>
+  <div class="container">
+    <div class="logo-container">
+      <img src="https://vgames1.github.io/vgamesblack.png" alt="VGames Logo">
+      <img src="https://vcloud24.github.io/vcloud24.png" alt="VCloud24 Logo">
+    </div>
+    <div class="language-selector">
+      <select id="languageSelector" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="af">Afrikaans</option>
+        <option value="zu">Zulu</option>
+      </select>
+    </div>
+    <h1 id="policyTitle">Privacy Policy</h1>
+    <div class="policy-content" id="policyContent">
+      <!-- English Content -->
+      <div id="en">
+        <p><strong>1. Introduction</strong></p>
+        <p>By using our services, you agree to follow our policies. If you do not agree, do not use our services.</p>
+        <p><strong>2. Liability</strong></p>
+        <p>We are not liable for any harm, loss, or damage that may occur while using our website.</p>
+        <p><strong>3. Violations</strong></p>
+        <p>If you are found cheating, violating copyright laws, or engaging in any illegal activity, we may:</p>
+        <ul>
+          <li>Suspend your account and IP address for 1-4 weeks or a month.</li>
+          <li>Permanently ban your account.</li>
+        </ul>
+        <p><strong>4. Copyright Infringement</strong></p>
+        <p>Do not copy or distribute our content without permission. Violators will face legal action.</p>
+      </div>
+
+      <!-- French Content -->
+      <div id="fr" style="display: none;">
+        <p><strong>1. Introduction</strong></p>
+        <p>En utilisant nos services, vous acceptez de suivre nos politiques. Si vous n'êtes pas d'accord, n'utilisez pas nos services.</p>
+        <p><strong>2. Responsabilité</strong></p>
+        <p>Nous ne sommes pas responsables des dommages, pertes ou préjudices qui pourraient survenir lors de l'utilisation de notre site web.</p>
+        <p><strong>3. Violations</strong></p>
+        <p>Si vous êtes pris en train de tricher, de violer les lois sur le droit d'auteur ou de vous livrer à des activités illégales, nous pouvons :</p>
+        <ul>
+          <li>Suspendre votre compte et votre adresse IP pendant 1 à 4 semaines ou un mois.</li>
+          <li>Bannir définitivement votre compte.</li>
+        </ul>
+        <p><strong>4. Violation du droit d'auteur</strong></p>
+        <p>Ne copiez pas ou ne distribuez pas notre contenu sans autorisation. Les contrevenants feront l'objet de poursuites judiciaires.</p>
+      </div>
+
+      <!-- Afrikaans Content -->
+      <div id="af" style="display: none;">
+        <p><strong>1. Inleiding</strong></p>
+        <p>Deur ons dienste te gebruik, stem jy in om ons beleide te volg. As jy nie saamstem nie, moenie ons dienste gebruik nie.</p>
+        <p><strong>2. Aanspreeklikheid</strong></p>
+        <p>Ons is nie aanspreeklik vir enige skade, verlies of nadeel wat kan voorkom terwyl jy ons webwerf gebruik nie.</p>
+        <p><strong>3. Oortredings</strong></p>
+        <p>As jy betrap word om te kul, kopieregwetgewing te oortree of aan enige onwettige aktiwiteite deel te neem, kan ons:</p>
+        <ul>
+          <li>Jou rekening en IP-adres vir 1-4 weke of 'n maand opskort.</li>
+          <li>Jou rekening permanent verban.</li>
+        </ul>
+        <p><strong>4. Kopieregskending</strong></p>
+        <p>Moenie ons inhoud kopieer of versprei sonder toestemming nie. Oortreders sal regstappe in die gesig staar.</p>
+      </div>
+
+      <!-- Zulu Content -->
+      <div id="zu" style="display: none;">
+        <p><strong>1. Isingeniso</strong></p>
+        <p>Ngokusebenzisa izinsiza zethu, uyavuma ukulandela imithetho yethu. Uma ungavumelani, ungasebenzisi izinsiza zethu.</p>
+        <p><strong>2. Ukubhekana Nokulimala</strong></p>
+        <p>Asikho sivikeli nganoma yikuphi ukulimala, ukulahlekelwa noma umonakalo ongase wenzeke ngesikhathi usebenzisa iwebhusayithi yethu.</p>
+        <p><strong>3. Ukwephula Imithetho</strong></p>
+        <p>Uma utholakala ekhohlisa, ephula imithetho yokukopisha noma enza noma yiziphi izenzo ezingekho emthethweni, singa:</p>
+        <ul>
+          <li>Ukumisa i-akhawunti yakho ne-IP ikheli le-1-4 amasonto noma inyanga.</li>
+          <li>Ukuvala i-akhawunti yakho unomphela.</li>
+        </ul>
+        <p><strong>4. Ukuphula Kwemvume Yokukopisha</strong></p>
+        <p>Ungakopishi noma usabalalise okuqukethwe kwethu ngaphandle kwemvume. Abaphuli bazobhekana nezenzo zomthetho.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Change language based on user selection
+    function changeLanguage() {
+      const selector = document.getElementById('languageSelector');
+      const selectedLanguage = selector.value;
+      const languages = ['en', 'fr', 'af', 'zu'];
+
+      // Hide all language content
+      languages.forEach(lang => {
+        document.getElementById(lang).style.display = 'none';
+      });
+
+      // Show selected language content
+      document.getElementById(selectedLanguage).style.display = 'block';
+
+      // Update policy title
+      const titles = {
+        en: 'Privacy Policy',
+        fr: 'Politique de Confidentialité',
+        af: 'Privaatheidsbeleid',
+        zu: 'Inqubomgomo Yobumfihlo',
+      };
+      document.getElementById('policyTitle').textContent = titles[selectedLanguage];
+    }
+
+    // Set default language to English
+    changeLanguage();
+  </script>
 </body>
 </html>
