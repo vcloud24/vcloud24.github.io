@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookies Policy - VGames</title>
+  <link rel="icon" href="https://vcloud24.github.io/vcloud24.png" type="image/png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      margin: 0;
+      padding: 1rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .logo-container img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .language-selector {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    .language-selector select {
+      padding: 0.5rem;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .policy-content {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="https://vgames1.github.io/vgamesblack.png" alt="VGames Logo">
+      <img src="https://vcloud24.github.io/vcloud24.png" alt="VCloud24 Logo">
+    </div>
+    <div class="language-selector">
+      <select id="languageSelector" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="af">Afrikaans</option>
+        <option value="zu">Zulu</option>
+      </select>
+    </div>
+    <h1 id="policyTitle">Cookies Policy</h1>
+    <div class="policy-content" id="policyContent">
+      <!-- English Content -->
+      <div id="en">
+        <p><strong>1. Introduction</strong></p>
+        <p>We use cookies to enhance your experience on our website. By using our services, you consent to the use of cookies.</p>
+        <p><strong>2. Data Collection</strong></p>
+        <p>We do not collect large amounts of personal data. However, we allow Google to collect data for ad personalization and analytics.</p>
+        <p><strong>3. Cookie Types</strong></p>
+        <p>We use both session cookies (temporary) and persistent cookies (long-term) to improve functionality.</p>
+        <p><strong>4. Managing Cookies</strong></p>
+        <p>You can manage or disable cookies through your browser settings. However, this may affect your experience.</p>
+      </div>
+
+      <!-- French Content -->
+      <div id="fr" style="display: none;">
+        <p><strong>1. Introduction</strong></p>
+        <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site web. En utilisant nos services, vous consentez à l'utilisation de cookies.</p>
+        <p><strong>2. Collecte de données</strong></p>
+        <p>Nous ne collectons pas de grandes quantités de données personnelles. Cependant, nous autorisons Google à collecter des données pour la personnalisation des publicités et l'analyse.</p>
+        <p><strong>3. Types de cookies</strong></p>
+        <p>Nous utilisons des cookies de session (temporaires) et des cookies persistants (à long terme) pour améliorer la fonctionnalité.</p>
+        <p><strong>4. Gestion des cookies</strong></p>
+        <p>Vous pouvez gérer ou désactiver les cookies via les paramètres de votre navigateur. Cependant, cela peut affecter votre expérience.</p>
+      </div>
+
+      <!-- Afrikaans Content -->
+      <div id="af" style="display: none;">
+        <p><strong>1. Inleiding</strong></p>
+        <p>Ons gebruik koekies om jou ervaring op ons webwerf te verbeter. Deur ons dienste te gebruik, stem jy in tot die gebruik van koekies.</p>
+        <p><strong>2. Data-insameling</strong></p>
+        <p>Ons versamel nie groot hoeveelhede persoonlike data nie. Ons laat egter Google toe om data in te samel vir advertensie-personalisering en ontleding.</p>
+        <p><strong>3. Soorte koekies</strong></p>
+        <p>Ons gebruik beide sessiekoekies (tydelik) en volgehoue koekies (langtermyn) om funksionaliteit te verbeter.</p>
+        <p><strong>4. Bestuur van koekies</strong></p>
+        <p>Jy kan koekies bestuur of deaktiveer deur jou blaaierinstellings. Dit kan egter jou ervaring beïnvloed.</p>
+      </div>
+
+      <!-- Zulu Content -->
+      <div id="zu" style="display: none;">
+        <p><strong>1. Isingeniso</strong></p>
+        <p>Sisebenzisa amakhukhi ukuthuthukisa isipiliyoni sakho kuwebhusayithi yethu. Ngokusebenzisa izinsiza zethu, uyavuma ukusetshenziswa kwamakhukhi.</p>
+        <p><strong>2. Ukuqoqwa Kwedatha</strong></p>
+        <p>Asiqoqeli inani elikhulu ledatha yomuntu siqu. Kodwa-ke, sivumela u-Google ukuqoqa idatha ukuze kwenziwe izikhangiso ngokomuntu siqu nokuhlaziya.</p>
+        <p><strong>3. Izinhlobo Zamakhukhi</strong></p>
+        <p>Sisebenzisa amakhukhi weseshini (okwesikhashana) kanye namakhukhi ahlala isikhathi eside ukuze sithuthukise ukusebenza.</p>
+        <p><strong>4. Ukuphatha Amakhukhi</strong></p>
+        <p>Ungaphatha noma ukuvala amakhukhi ngokusebenzisa izilungiselelo zokugunda kwakho. Kodwa-ke, lokhu kungathinta isipiliyoni sakho.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Change language based on user selection
+    function changeLanguage() {
+      const selector = document.getElementById('languageSelector');
+      const selectedLanguage = selector.value;
+      const languages = ['en', 'fr', 'af', 'zu'];
+
+      // Hide all language content
+      languages.forEach(lang => {
+        document.getElementById(lang).style.display = 'none';
+      });
+
+      // Show selected language content
+      document.getElementById(selectedLanguage).style.display = 'block';
+
+      // Update policy title
+      const titles = {
+        en: 'Cookies Policy',
+        fr: 'Politique relative aux cookies',
+        af: 'Koekiebeleid',
+        zu: 'Inqubomgomo Yamakhukhi',
+      };
+      document.getElementById('policyTitle').textContent = titles[selectedLanguage];
+    }
+
+    // Set default language to English
+    changeLanguage();
+  </script>
+</body>
+</html>
