@@ -4,21 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VCLOUD24 - Hardcore Tic Tac Toe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Hardcore Theme Styles */
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #00cec9;
+            --accent: #fd79a8;
+            --dark: #1e1e2f;
+            --darker: #12121a;
+            --light: #f5f6fa;
+            --text: #f5f6fa;
+            --background: #1e1e2f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Arial Black', sans-serif;
-            background: #000;
-            color: #fff;
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--background);
+            color: var(--text);
             text-align: center;
-            padding: 50px;
+            padding: 20px;
             margin: 0;
         }
 
         h1, h2 {
-            font-family: 'Impact', sans-serif;
-            color: #ff0000;
-            text-shadow: 2px 2px 5px #ff0000;
+            font-family: 'Press Start 2P', cursive;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(108, 92, 231, 0.7);
+            margin-bottom: 20px;
         }
 
         .page {
@@ -26,7 +44,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 90vh;
+            padding: 20px;
         }
 
         .page.active {
@@ -34,83 +53,146 @@
         }
 
         input {
-            padding: 10px;
+            padding: 12px 15px;
             margin: 10px;
-            border: 2px solid #ff0000;
-            background: #222;
-            color: #fff;
-            font-family: 'Arial Black', sans-serif;
+            border: 2px solid var(--primary);
+            background: var(--darker);
+            color: var(--text);
+            font-family: 'Roboto Mono', monospace;
             font-size: 16px;
+            border-radius: 4px;
+            width: 250px;
+            max-width: 90%;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(253, 121, 168, 0.5);
         }
 
         button {
-            padding: 10px 20px;
-            background: #ff0000;
-            color: #000;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
             border: none;
             cursor: pointer;
-            font-family: 'Impact', sans-serif;
-            font-size: 18px;
-            text-transform: uppercase;
-            box-shadow: 2px 2px 5px #ff0000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            border-radius: 4px;
+            margin: 10px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
         button:hover {
-            background: #cc0000;
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(253, 121, 168, 0.4);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0) 45%,
+                rgba(255, 255, 255, 0.2) 48%,
+                rgba(255, 255, 255, 0.2) 52%,
+                rgba(255, 255, 255, 0) 55%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: all 0.3s ease;
+        }
+
+        button:hover::before {
+            left: 100%;
         }
 
         #gameBoard {
             display: grid;
             grid-template-columns: repeat(3, 100px);
             grid-template-rows: repeat(3, 100px);
-            gap: 5px;
-            margin: 20px auto;
+            gap: 10px;
+            margin: 30px auto;
         }
 
         .cell {
             width: 100px;
             height: 100px;
-            background: #222;
+            background: var(--darker);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 40px;
             cursor: pointer;
-            color: #ff0000;
-            font-family: 'Impact', sans-serif;
-            text-shadow: 2px 2px 5px #ff0000;
+            color: var(--primary);
+            font-family: 'Press Start 2P', cursive;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            transition: all 0.3s;
+            text-shadow: 0 0 10px rgba(108, 92, 231, 0.7);
         }
 
         .cell:hover {
-            background: #333;
+            background: rgba(108, 92, 231, 0.1);
+            transform: scale(1.05);
+        }
+
+        .cell.x {
+            color: var(--primary);
+        }
+
+        .cell.o {
+            color: var(--secondary);
         }
 
         #scoreBoard {
             margin-top: 20px;
-            font-size: 20px;
-            color: #ff0000;
-            text-shadow: 2px 2px 5px #ff0000;
+            font-size: 18px;
+            color: var(--secondary);
+            text-shadow: 0 0 5px rgba(0, 206, 201, 0.5);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        #scoreBoard p {
+            margin: 0;
         }
 
         #logo {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 100px;
+            width: 80px;
+            filter: drop-shadow(0 0 5px rgba(108, 92, 231, 0.7));
         }
 
-        /* Custom Modal Styles */
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #000;
-            border: 2px solid #ff0000;
-            padding: 20px;
+            background: var(--darker);
+            border: 2px solid var(--primary);
+            padding: 30px;
             z-index: 1000;
             text-align: center;
+            border-radius: 8px;
+            max-width: 90%;
+            width: 400px;
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
         }
 
         .modal.active {
@@ -118,8 +200,9 @@
         }
 
         .modal p {
-            font-size: 20px;
-            color: #fff;
+            font-size: 18px;
+            color: var(--text);
+            margin-bottom: 20px;
         }
 
         .modal button {
@@ -133,12 +216,166 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(30, 30, 47, 0.9);
             z-index: 999;
         }
 
         .overlay.active {
             display: block;
+        }
+
+        /* Error Message */
+        #codeError {
+            color: var(--accent);
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        /* Policy Widget */
+        #policyWidget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(30, 30, 47, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--primary);
+            z-index: 1000;
+            max-width: 200px;
+        }
+
+        #policyWidget div:first-child {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        #policyWidget span {
+            font-size: 14px;
+            color: var(--secondary);
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        #policyWidget button {
+            background: var(--accent);
+            color: var(--darker);
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 10px;
+            padding: 0;
+            margin: 0;
+        }
+
+        #policyLinks {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        #policyLinks a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        #policyLinks a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Popup Windows */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--darker);
+            border: 2px solid var(--primary);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
+            z-index: 1001;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .popup-header h3 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--primary);
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .popup-header button {
+            background: var(--accent);
+            color: var(--darker);
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 0;
+        }
+
+        .popup iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            #gameBoard {
+                grid-template-columns: repeat(3, 80px);
+                grid-template-rows: repeat(3, 80px);
+            }
+            
+            .cell {
+                width: 80px;
+                height: 80px;
+                font-size: 30px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 18px;
+            }
+            
+            #logo {
+                width: 60px;
+            }
         }
     </style>
 </head>
@@ -146,7 +383,7 @@
     <!-- Login Page -->
     <div id="loginPage" class="page active">
         <h1>VCLOUD24</h1>
-        <h2>vgames</h2>
+        <h2>VGAMES EDITION</h2>
         <form id="loginForm">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
@@ -157,17 +394,17 @@
 
     <!-- Code Entry Page -->
     <div id="codePage" class="page">
-        <h1>Enter Code</h1>
+        <h1>ENTER ACCESS CODE</h1>
         <input type="text" id="codeInput" placeholder="Enter 5-digit code" maxlength="5">
         <button onclick="submitCode()">Submit</button>
-        <p id="codeError" style="color: #ff0000; display: none;">Invalid code. Try again.</p>
+        <p id="codeError">Invalid code. Try again.</p>
     </div>
 
     <!-- Game Page -->
     <div id="gamePage" class="page">
-        <h1>VCLOUD</h1>
-        <button onclick="startGame()">Play</button>
-        <div id="gameBoard">
+        <h1>VCLOUD TIC TAC TOE</h1>
+        <button onclick="startGame()">NEW GAME</button>
+        <div id="gameBoard" style="display: none;">
             <div class="cell" data-index="0"></div>
             <div class="cell" data-index="1"></div>
             <div class="cell" data-index="2"></div>
@@ -179,52 +416,94 @@
             <div class="cell" data-index="8"></div>
         </div>
         <div id="scoreBoard">
-            <p>Time: <span id="time">00:00</span></p>
-            <p>Score: <span id="score">0</span></p>
+            <p>TIME: <span id="time">00:00</span></p>
+            <p>SCORE: <span id="score">0</span></p>
         </div>
     </div>
 
-    <!-- Custom Modal for Messages -->
+    <!-- Game Result Modal -->
     <div id="messageModal" class="modal">
         <p id="modalMessage"></p>
-        <button onclick="hideModal()">Close</button>
+        <button onclick="hideModal()">CONTINUE</button>
     </div>
     <div id="overlay" class="overlay"></div>
 
-    <!-- Embedded Logo -->
-    <img src="https://www.canva.com/design/DAGeli_tzpA/Rl41muKHBPWhrNYszSuhyw/watch" alt="VCLOUD24 Logo" id="logo">
+    <!-- VGAMES Logo -->
+    <img src="vgstu.png" alt="VGAMES Logo" id="logo">
+
+    <!-- Policy Widget -->
+    <div id="policyWidget">
+        <div>
+            <span>POLICIES</span>
+            <button onclick="hideWidget()">X</button>
+        </div>
+        <div id="policyLinks">
+            <a href="#" onclick="openPopup('tc')">Terms & Conditions</a>
+            <a href="#" onclick="openPopup('pp')">Privacy Policy</a>
+            <a href="#" onclick="openPopup('cookiep')">Cookie Policy</a>
+        </div>
+    </div>
+
+    <!-- Policy Popups -->
+    <div id="tcPopup" class="popup">
+        <div class="popup-header">
+            <h3>TERMS & CONDITIONS</h3>
+            <button onclick="closePopup('tcPopup')">X</button>
+        </div>
+        <iframe src="http://www.vgames.run.place/TVR"></iframe>
+    </div>
+
+    <div id="ppPopup" class="popup">
+        <div class="popup-header">
+            <h3>PRIVACY POLICY</h3>
+            <button onclick="closePopup('ppPopup')">X</button>
+        </div>
+        <iframe src="http://www.vgames.run.place/TVR"></iframe>
+    </div>
+
+    <div id="cookiepPopup" class="popup">
+        <div class="popup-header">
+            <h3>COOKIE POLICY</h3>
+            <button onclick="closePopup('cookiepPopup')">X</button>
+        </div>
+        <iframe src="http://www.vgames.run.place/TVR"></iframe>
+    </div>
 
     <!-- Include CryptoJS for encryption -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-    <!-- JavaScript -->
     <script>
-        // Encrypted accounts (username: encryptedPassword)
+       
         const accounts = {
-            "vuy25@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0", // Encrypted password for [imunavailable]
-            "phili123@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0", // Encrypted password for [iamtheghost]
-            "jimmy2@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0" // Encrypted password for [stronger1010]
+            "vuy25@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0", 
+            "phili123@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0", 
+            "jimmy2@vc.git": "U2FsdGVkX1+3Q4Z5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z4A5B6C7D8E9F0G1H2I3J4K5L6M7N8O9P0Q1R2S3T4U5V6W7X8Y9Z0" 
         };
 
-        // Encryption functions
+        
         function encrypt(data) {
-            return CryptoJS.AES.encrypt(data, "hardcore-key").toString();
+            return CryptoJS.AES.encrypt(data, "vgames-secure-key").toString();
         }
 
         function decrypt(data) {
-            const bytes = CryptoJS.AES.decrypt(data, "hardcore-key");
-            return bytes.toString(CryptoJS.enc.Utf8);
+            try {
+                const bytes = CryptoJS.AES.decrypt(data, "vgames-secure-key");
+                return bytes.toString(CryptoJS.enc.Utf8);
+            } catch (e) {
+                return "";
+            }
         }
 
-        // Show code page
-        let currentMode = ""; // "account" or "guest"
+        
+        let currentMode = "";
         function showCodePage(mode) {
             currentMode = mode;
             document.getElementById("loginPage").classList.remove("active");
             document.getElementById("codePage").classList.add("active");
+            document.getElementById("codeError").style.display = "none";
         }
 
-        // Submit code
+       
         function submitCode() {
             const code = document.getElementById("codeInput").value;
             if (currentMode === "account" && code === "7349") {
@@ -234,14 +513,14 @@
                 document.getElementById("codePage").classList.remove("active");
                 document.getElementById("gamePage").classList.add("active");
             } else if (code === "9898") {
-                showModal("Resetting web...");
+                showModal("RESETTING SYSTEM...");
                 setTimeout(() => window.location.reload(), 2000);
             } else {
                 document.getElementById("codeError").style.display = "block";
             }
         }
 
-        // Login logic
+       
         document.getElementById("loginForm").addEventListener("submit", function (e) {
             e.preventDefault();
             const username = document.getElementById("username").value;
@@ -250,11 +529,11 @@
             if (accounts[username] && decrypt(accounts[username]) === password) {
                 showCodePage("account");
             } else {
-                showModal("Invalid username or password.");
+                showModal("INVALID CREDENTIALS");
             }
         });
 
-        // Game logic
+        
         let board = ["", "", "", "", "", "", "", "", ""];
         let currentPlayer = "X";
         let gameActive = false;
@@ -262,7 +541,7 @@
         let score = 0;
         let timerInterval;
 
-        // Start game
+        
         function startGame() {
             gameActive = true;
             document.getElementById("gameBoard").style.display = "grid";
@@ -270,67 +549,93 @@
             startTimer();
         }
 
-        // Reset board
+       
         function resetBoard() {
             board = ["", "", "", "", "", "", "", "", ""];
             currentPlayer = "X";
+            time = 0;
+            updateTimerDisplay();
             renderBoard();
         }
 
-        // Render board
+        
         function renderBoard() {
             const cells = document.querySelectorAll(".cell");
             cells.forEach((cell, index) => {
                 cell.textContent = board[index];
+                cell.className = "cell";
+                if (board[index] === "X") {
+                    cell.classList.add("x");
+                } else if (board[index] === "O") {
+                    cell.classList.add("o");
+                }
             });
         }
 
-        // Player move
+        
         function makeMove(index) {
             if (board[index] === "" && gameActive) {
                 board[index] = currentPlayer;
                 renderBoard();
                 checkWin();
                 currentPlayer = currentPlayer === "X" ? "O" : "X";
+                
+                
+                if (gameActive && currentPlayer === "O") {
+                    setTimeout(() => {
+                        const emptyCells = board.map((cell, idx) => cell === "" ? idx : null).filter(val => val !== null);
+                        if (emptyCells.length > 0) {
+                            const randomIndex = Math.floor(Math.random() * emptyCells.length);
+                            makeMove(emptyCells[randomIndex]);
+                        }
+                    }, 500);
+                }
             }
         }
 
-        // Check for winner
+      
         function checkWin() {
             const winningCombinations = [
                 [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
                 [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
                 [0, 4, 8], [2, 4, 6] // Diagonals
             ];
+            
             for (let combo of winningCombinations) {
                 const [a, b, c] = combo;
                 if (board[a] && board[a] === board[b] && board[a] === board[c]) {
                     gameActive = false;
-                    showModal(`Player ${board[a]} wins!`);
+                    clearInterval(timerInterval);
+                    score += 100;
+                    document.getElementById("score").textContent = score;
+                    showModal(`PLAYER ${board[a]} WINS!`);
                     return;
                 }
             }
+            
             if (!board.includes("")) {
                 gameActive = false;
-                showModal("It's a draw!");
+                clearInterval(timerInterval);
+                showModal("DRAW GAME!");
             }
         }
 
-        // Timer
+        
         function startTimer() {
+            clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 time++;
-                document.getElementById("time").textContent = formatTime(time);
+                updateTimerDisplay();
             }, 1000);
         }
 
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+        function updateTimerDisplay() {
+            const mins = Math.floor(time / 60);
+            const secs = time % 60;
+            document.getElementById("time").textContent = `${mins < 10 ? "0" : ""}${mins}:${secs < 10 ? "0" : ""}${secs}`;
         }
 
-        // Custom Modal Functions
+        // Modal functions
         function showModal(message) {
             document.getElementById("modalMessage").textContent = message;
             document.getElementById("messageModal").classList.add("active");
@@ -340,66 +645,35 @@
         function hideModal() {
             document.getElementById("messageModal").classList.remove("active");
             document.getElementById("overlay").classList.remove("active");
+            resetBoard();
         }
 
-        // Event listeners
+        
+        function openPopup(policy) {
+            document.getElementById(`${policy}Popup`).style.display = 'block';
+            document.getElementById("overlay").classList.add("active");
+        }
+
+        function closePopup(policy) {
+            document.getElementById(policy).style.display = 'none';
+            document.getElementById("overlay").classList.remove("active");
+        }
+
+        function hideWidget() {
+            document.getElementById('policyWidget').style.display = 'none';
+        }
+
+      
         document.querySelectorAll(".cell").forEach(cell => {
-            cell.addEventListener("click", () => makeMove(parseInt(cell.getAttribute("data-index"))));
+            cell.addEventListener("click", () => {
+                if (gameActive && currentPlayer === "X") {
+                    makeMove(parseInt(cell.getAttribute("data-index")));
+                }
+            });
         });
+
+       
+        document.getElementById("codeError").style.display = "none";
     </script>
 </body>
 </html>
-<!-- Widget Container -->
-<div id="policyWidget" style="position: fixed; bottom: 20px; right: 20px; background: rgba(255, 255, 255, 0.9); padding: 10px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); z-index: 1000;">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-    <span style="font-size: 14px; color: #333;">Policies</span>
-    <button onclick="hideWidget()" style="background: #007bff; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">X</button>
-  </div>
-  <div style="display: flex; flex-direction: column; gap: 4px;">
-    <a href="#" onclick="openPopup('tc')" style="color: #007bff; text-decoration: none; font-size: 12px;">Terms</a>
-    <a href="#" onclick="openPopup('pp')" style="color: #007bff; text-decoration: none; font-size: 12px;">Privacy</a>
-    <a href="#" onclick="openPopup('cookiep')" style="color: #007bff; text-decoration: none; font-size: 12px;">Cookies</a>
-  </div>
-</div>
-
-<!-- Pop-Up Windows -->
-<div id="tcPopup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 10px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); z-index: 1001; width: 80%; max-width: 500px; max-height: 80vh; overflow-y: auto; display: none;">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-    <h3 style="margin: 0; font-size: 16px; color: #333;">Terms and Conditions</h3>
-    <button onclick="closePopup('tcPopup')" style="background: #ff4d4d; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">X</button>
-  </div>
-  <iframe src="https://vcloud24.github.io/tc" width="100%" height="300" style="border: none;"></iframe>
-</div>
-
-<div id="ppPopup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 10px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); z-index: 1001; width: 80%; max-width: 500px; max-height: 80vh; overflow-y: auto; display: none;">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-    <h3 style="margin: 0; font-size: 16px; color: #333;">Privacy Policy</h3>
-    <button onclick="closePopup('ppPopup')" style="background: #ff4d4d; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">X</button>
-  </div>
-  <iframe src="https://vcloud24.github.io/pp" width="100%" height="300" style="border: none;"></iframe>
-</div>
-
-<div id="cookiepPopup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 10px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); z-index: 1001; width: 80%; max-width: 500px; max-height: 80vh; overflow-y: auto; display: none;">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-    <h3 style="margin: 0; font-size: 16px; color: #333;">Cookies Policy</h3>
-    <button onclick="closePopup('cookiepPopup')" style="background: #ff4d4d; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">X</button>
-  </div>
-  <iframe src="https://vcloud24.github.io/cookiep" width="100%" height="300" style="border: none;"></iframe>
-</div>
-
-<script>
-  // Open pop-up window
-  function openPopup(policy) {
-    document.getElementById(`${policy}Popup`).style.display = 'block';
-  }
-
-  // Close pop-up window
-  function closePopup(policy) {
-    document.getElementById(policy).style.display = 'none';
-  }
-
-  // Hide widget
-  function hideWidget() {
-    document.getElementById('policyWidget').style.display = 'none';
-  }
-</script>
